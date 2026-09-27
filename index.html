@@ -625,7 +625,7 @@
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
 <script>
-    // Your exact Firebase Project Credentials
+    // Firebase Credentials
     const firebaseConfig = {
       apiKey: "AIzaSyDnDaK54LhQNj6goCHTGg_lHws4RR8UdR4",
       authDomain: "vote4malik-2f0f1.firebaseapp.com",
@@ -656,7 +656,7 @@
         }
     });
 
-    // EVM Beep Sound Function
+    // EVM Beep Sound Function (2.5 Seconds Duration)
     function playSound(type) {
         if (!audioCtx) {
             audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -680,7 +680,7 @@
            oscillator.frequency.setValueAtTime(3000, audioCtx.currentTime);
            gainNode.gain.setValueAtTime(0.08, audioCtx.currentTime);
            oscillator.start();
-           oscillator.stop(audioCtx.currentTime + 2.5);
+           oscillator.stop(audioCtx.currentTime + 2.5); // 2.5 സെക്കൻഡ് ബീപ് സൗണ്ട്
         }
     }
 
@@ -696,20 +696,24 @@
         }
 
         hasVoted = true;
-        playSound('success');
 
-        // Increment count live in Firebase Realtime Database
-        const candidateRef = database.ref('votes/candidate_' + id);
-        candidateRef.transaction((currentVotes) => {
-            return (currentVotes || 0) + 1;
-        });
-
+        // 1. റെഡ് ലൈറ്റ് (LED) ഓണാക്കുന്നു
         const led = document.getElementById('led-' + id);
         if(led) led.classList.add('led-on');
 
         display.innerHTML = "VOTE RECORDING...";
 
+        // 2. ബീപ് സൗണ്ട് കേൾക്കാൻ തുടങ്ങുന്നു
+        playSound('success');
+
+        // 3. ബീപ് സൗണ്ട് പൂർത്തിയായ ശേഷം മാത്രം (2.5 സെക്കൻഡിന് ശേഷം) ഡാറ്റാബേസിൽ കൗണ്ട് കൂട്ടുന്നു
         setTimeout(() => {
+            const candidateRef = database.ref('votes/candidate_' + id);
+            candidateRef.transaction((currentVotes) => {
+                return (currentVotes || 0) + 1;
+            });
+
+            // മെയിൻ ഇന്റർഫേസ് മറച്ച് നന്ദി പേജിലേക്ക് മാറ്റുന്നു
             document.getElementById('evm-main-interface').style.display = 'none';
             document.getElementById('thanks-container').style.display = 'block';
             
@@ -732,7 +736,7 @@
                 videoPlayer.play();
             });
             
-        }, 2500);
+        }, 2500); // 2.5 സെക്കൻഡ് ബീപ്പിന് ശേഷം വോട്ട് അപ്ഡേറ്റ് ആകുന്നു
     }
 
     // Reset Machine
