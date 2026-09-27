@@ -144,13 +144,13 @@
         .candidate-name {
             font-size: 15px;
             font-weight: 800;
-            color: #0f172a; /* Black / Dark Color */
+            color: #0f172a;
             line-height: 1.2;
             word-break: break-word;
         }
 
         .candidate-name.main-candidate {
-            color: #0f172a; /* Standard Black Color */
+            color: #0f172a;
             font-size: 16px;
         }
 
@@ -257,7 +257,7 @@
             border: 1px solid #86efac;
         }
 
-        /* Native HTML5 Video Wrapper */
+        /* Native HTML5 Video & End Image Wrapper */
         .video-wrapper {
             margin: 12px 0;
             width: 100%;
@@ -273,6 +273,13 @@
             max-height: 450px;
             display: block;
             outline: none;
+        }
+
+        .video-wrapper img {
+            width: 100%;
+            height: auto;
+            display: none;
+            border-radius: 8px;
         }
 
         .reset-btn {
@@ -441,15 +448,16 @@
 
     </div>
 
-    <!-- Thanks Screen & MP4 Video Player (Initially Hidden) -->
+    <!-- Thanks Screen & Video/Image Container -->
     <div id="thanks-container">
         <div class="thanks-badge">✔ വോട്ട് വിജയികരമായി രേഖപ്പെടുത്തി</div>
         <h2>മാലിക് മാങ്കോടിന് നിങ്ങളുടെ വിലയേറിയ വോട്ട് നൽകിയതിന് നന്ദി!</h2>
         <p style="font-size:13px; color:#64748b; margin-bottom:10px;">ബാലറ്റിൽ രണ്ടാമത്, ജനഹൃദയങ്ങളിൽ ഒന്നാമത്!</p>
 
-        <!-- HTML5 MP4 Video Player -->
+        <!-- HTML5 MP4 Video & End Banner Image Wrapper -->
         <div class="video-wrapper">
              <video id="mp4-player" controls autoplay playsinline muted></video>
+             <img id="end-banner-img" src="https://raw.githubusercontent.com/binukallara/Vote4ldf/refs/heads/main/1790415548160.png" alt="Election Poster">
         </div>
 
         <button class="reset-btn" onclick="resetMachine()">വീണ്ടും വോട്ട് ചെയ്യാൻ</button>
@@ -527,10 +535,22 @@
             document.getElementById('evm-main-interface').style.display = 'none';
             document.getElementById('thanks-container').style.display = 'block';
             
-            // Raw GitHub MP4 Video Stream Link
             const videoPlayer = document.getElementById('mp4-player');
+            const endBanner = document.getElementById('end-banner-img');
+
+            // Reset initial visibility state
+            videoPlayer.style.display = 'block';
+            endBanner.style.display = 'none';
+            
+            // Raw GitHub MP4 Video Stream Link
             videoPlayer.src = "https://raw.githubusercontent.com/binukallara/Vote4ldf/main/പുതിയ%20ചിന്തകൾ%20ഉറച്ച%20ചുവടുകൾ%20❤%EF%B8%8F.mp4";
             
+            // Video Ended Event Listener -> Show Poster Image
+            videoPlayer.onended = function() {
+                videoPlayer.style.display = 'none';
+                endBanner.style.display = 'block';
+            };
+
             // Unmute & Play
             videoPlayer.muted = false;
             videoPlayer.play().catch(() => {
@@ -552,8 +572,12 @@
         display.classList.remove('error-msg');
 
         const videoPlayer = document.getElementById('mp4-player');
+        const endBanner = document.getElementById('end-banner-img');
+
         videoPlayer.pause();
         videoPlayer.src = "";
+        videoPlayer.style.display = 'block';
+        if (endBanner) endBanner.style.display = 'none';
 
         document.getElementById('evm-main-interface').style.display = 'block';
         document.getElementById('thanks-container').style.display = 'none';
