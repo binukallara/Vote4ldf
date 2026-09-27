@@ -44,30 +44,33 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Zilla Panchayat Header Banner */
+        /* Zilla Panchayat Header Banner - Bright Red Gradient Theme */
         .zp-header-banner {
-            background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+            background: linear-gradient(135deg, #ef4444 0%, #991b1b 100%);
             color: #ffffff;
             text-align: center;
-            padding: 10px 6px;
+            padding: 12px 8px;
             border-radius: 8px;
             margin-bottom: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
-            border: 2px solid #78350f;
+            box-shadow: 0 4px 8px rgba(220, 38, 38, 0.3);
+            border: 2px solid #7f1d1d;
         }
 
         .zp-header-banner h1 {
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.3px;
+            color: #ffffff;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
         }
 
         .zp-header-banner h2 {
-            font-size: 13px;
-            font-weight: 600;
-            margin-top: 2px;
-            color: #fef3c7;
+            font-size: 13.5px;
+            font-weight: 700;
+            margin-top: 3px;
+            color: #fef08a;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
 
         /* Digital Display Screen */
@@ -95,7 +98,7 @@
         /* Yellow Ballot Paper Unit (Zilla Panchayat) */
         .ballot-unit {
             background-color: #fef08a; /* Official Yellow Ballot Paper Theme */
-            border: 2px solid #ca8a04;
+            border: 2px solid #eab308;
             border-radius: 8px;
             padding: 6px;
         }
@@ -105,7 +108,7 @@
             display: flex;
             align-items: center;
             background: #ffffff;
-            border: 1px solid #d97706;
+            border: 1px solid #fca5a5;
             margin-bottom: 6px;
             padding: 4px 6px;
             min-height: 60px;
@@ -121,7 +124,7 @@
             font-weight: 800;
             font-size: 18px;
             color: #1e293b;
-            border-right: 2px solid #ca8a04;
+            border-right: 2px solid #fca5a5;
             padding-right: 4px;
             text-align: center;
             flex-shrink: 0;
@@ -147,7 +150,7 @@
         }
 
         .candidate-name.main-candidate {
-            color: #b91c1c; /* Standout Red for Malik Mankode */
+            color: #dc2626; /* Standout Red for Malik Mankode */
             font-size: 16px;
         }
 
@@ -232,7 +235,7 @@
             width: 100%;
             max-width: 580px;
             animation: fadeIn 0.5s ease-in-out;
-            border: 4px solid #f59e0b;
+            border: 4px solid #dc2626;
         }
 
         #thanks-container h2 {
@@ -276,7 +279,7 @@
             display: inline-block;
             margin-top: 10px;
             padding: 9px 22px;
-            background: linear-gradient(135deg, #475569 0%, #334155 100%);
+            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
             color: white;
             border: none;
             cursor: pointer;
@@ -372,7 +375,7 @@
 
             <!-- Candidate 2: Malik Mankode -->
             <div class="candidate-row" style="border: 2px solid #dc2626; background: #fff5f5;">
-                <span class="serial-no" style="color: #dc2626;">2</span>
+                <span class="serial-no" style="color: #dc2626; border-right-color: #fca5a5;">2</span>
                 <div class="candidate-info">
                     <span class="candidate-name main-candidate">സ. മാലിക് മാങ്കോട്</span>
                     <div class="party-symbol-container">
@@ -531,7 +534,6 @@
             // Unmute & Play
             videoPlayer.muted = false;
             videoPlayer.play().catch(() => {
-                // Browsers block autoplay with sound sometimes, fall back to muted autoplay
                 videoPlayer.muted = true;
                 videoPlayer.play();
             });
