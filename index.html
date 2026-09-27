@@ -19,7 +19,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px 10px;
+            padding: 12px 6px;
             min-height: 100vh;
         }
 
@@ -31,10 +31,10 @@
 
         /* EVM Main Panel */
         #evm-main-interface {
-            border: 5px solid #1e293b;
+            border: 4px solid #1e293b;
             background-color: #e2e8f0;
-            padding: 16px;
-            border-radius: 16px;
+            padding: 10px;
+            border-radius: 14px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
             animation: fadeIn 0.4s ease-in-out;
         }
@@ -49,25 +49,24 @@
             background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
             color: #ffffff;
             text-align: center;
-            padding: 12px;
-            border-radius: 10px;
-            margin-bottom: 12px;
+            padding: 10px 6px;
+            border-radius: 8px;
+            margin-bottom: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
             border: 2px solid #78350f;
         }
 
         .zp-header-banner h1 {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            letter-spacing: 0.3px;
         }
 
         .zp-header-banner h2 {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
-            margin-top: 3px;
+            margin-top: 2px;
             color: #fef3c7;
         }
 
@@ -76,16 +75,15 @@
             background-color: #000000;
             color: #00ff66;
             font-family: 'Courier New', Courier, monospace;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: bold;
             text-align: center;
-            padding: 12px;
-            margin-bottom: 15px;
+            padding: 10px;
+            margin-bottom: 12px;
             border: 3px solid #475569;
             border-radius: 8px;
             text-transform: uppercase;
             box-shadow: inset 0 0 10px rgba(0, 255, 102, 0.3);
-            transition: all 0.3s ease;
         }
 
         .error-msg {
@@ -98,9 +96,8 @@
         .ballot-unit {
             background-color: #fef08a; /* Official Yellow Ballot Paper Theme */
             border: 2px solid #ca8a04;
-            border-radius: 10px;
-            padding: 8px;
-            box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            padding: 6px;
         }
 
         /* Candidate Row */
@@ -109,11 +106,10 @@
             align-items: center;
             background: #ffffff;
             border: 1px solid #d97706;
-            margin-bottom: 8px;
-            padding: 6px 12px;
-            height: 65px;
-            border-radius: 8px;
-            transition: all 0.2s ease;
+            margin-bottom: 6px;
+            padding: 4px 6px;
+            min-height: 60px;
+            border-radius: 6px;
         }
 
         .candidate-row:last-child {
@@ -121,79 +117,78 @@
         }
 
         .serial-no {
-            width: 32px;
+            width: 22px;
             font-weight: 800;
-            font-size: 22px;
+            font-size: 18px;
             color: #1e293b;
             border-right: 2px solid #ca8a04;
-            padding-right: 8px;
+            padding-right: 4px;
             text-align: center;
+            flex-shrink: 0;
         }
 
         .candidate-info {
             flex-grow: 1;
-            padding-left: 12px;
-            padding-right: 10px;
+            padding: 0 6px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             overflow: hidden;
-            height: 100%;
+            min-width: 0; /* Flexbox text overflow fix */
         }
 
-        /* Clearly Visible & Bold Candidate Name */
+        /* Fully Visible Name with Responsive Auto-wrap */
         .candidate-name {
-            font-size: 19px;
+            font-size: 15px;
             font-weight: 800;
             color: #0f172a;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            letter-spacing: 0.3px;
+            line-height: 1.2;
+            word-break: break-word;
         }
 
         .candidate-name.main-candidate {
             color: #b91c1c; /* Standout Red for Malik Mankode */
-            font-size: 20px;
+            font-size: 16px;
         }
 
         .party-symbol-container {
-            width: 44px;
-            height: 44px;
+            width: 36px;
+            height: 36px;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
+            margin-left: 4px;
         }
 
         .nota-box {
             border: 2px solid #475569;
             border-radius: 4px;
             font-weight: 800;
-            font-size: 12px;
+            font-size: 11px;
             color: #334155;
-            padding: 2px 6px;
+            padding: 2px 4px;
             background: #f1f5f9;
         }
 
-        /* Vote Button & LED */
+        /* Vote Button & LED Container */
         .vote-btn-container {
             display: flex;
             align-items: center;
             margin-left: auto;
             flex-shrink: 0;
             background: #f1f5f9;
-            padding: 4px 8px;
+            padding: 3px 6px;
             border-radius: 6px;
             border: 1px solid #cbd5e1;
         }
 
         .led-lamp {
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
             background-color: #450a0a;
             border-radius: 50%;
-            margin-right: 12px;
+            margin-right: 8px;
             border: 2px solid #1e293b;
             transition: all 0.2s ease;
         }
@@ -205,8 +200,8 @@
         }
 
         .vote-btn {
-            width: 55px;
-            height: 34px;
+            width: 46px;
+            height: 32px;
             background: linear-gradient(180deg, #2563eb 0%, #1d4ed8 100%);
             border-radius: 6px;
             border: 2px solid #1e40af;
@@ -225,7 +220,7 @@
             display: none;
             text-align: center;
             background: #ffffff;
-            padding: 24px;
+            padding: 20px 14px;
             border-radius: 16px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.4);
             width: 100%;
@@ -236,25 +231,25 @@
 
         #thanks-container h2 {
             color: #1e293b;
-            margin-bottom: 8px;
-            font-size: 1.25em;
+            margin-bottom: 6px;
+            font-size: 1.15em;
             font-weight: 800;
         }
 
         .thanks-badge {
             background-color: #dcfce7;
             color: #166534;
-            padding: 6px 16px;
+            padding: 5px 14px;
             border-radius: 20px;
             font-weight: bold;
             display: inline-block;
-            margin-bottom: 15px;
-            font-size: 14px;
+            margin-bottom: 12px;
+            font-size: 13px;
             border: 1px solid #86efac;
         }
 
         .video-wrapper {
-            margin: 15px 0;
+            margin: 12px 0;
             width: 100%;
             height: 0;
             padding-bottom: 56.25%;
@@ -276,71 +271,62 @@
         .reset-btn {
             display: inline-block;
             margin-top: 10px;
-            padding: 10px 24px;
+            padding: 9px 22px;
             background: linear-gradient(135deg, #475569 0%, #334155 100%);
             color: white;
             border: none;
             cursor: pointer;
             border-radius: 30px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: bold;
             box-shadow: 0 4px 6px rgba(0,0,0,0.2);
             transition: all 0.2s;
         }
 
-        .reset-btn:hover {
-            background: #1e293b;
-            transform: translateY(-1px);
-        }
-
         /* Share Section */
         .share-section {
-            margin-top: 20px;
+            margin-top: 16px;
             border-top: 2px dashed #cbd5e1;
-            padding-top: 15px;
+            padding-top: 12px;
             text-align: center;
         }
         
         .share-title {
-            font-size: 13px;
+            font-size: 12px;
             color: #64748b;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
         .share-buttons-row {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
         }
 
         .share-btn {
             text-decoration: none;
-            padding: 8px 16px;
+            padding: 8px 14px;
             color: white;
             border-radius: 8px;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: bold;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            transition: transform 0.2s, opacity 0.2s;
+            gap: 4px;
             border: none;
             cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
         }
         
-        .share-btn:hover { opacity: 0.9; transform: translateY(-1px); }
         .whatsapp { background-color: #25D366; }
         .facebook { background-color: #1877F2; }
         .telegram { background-color: #0088cc; }
 
         .footer-copyright {
             text-align: center;
-            margin-top: 25px;
+            margin-top: 20px;
             font-size: 12px;
             color: #94a3b8;
         }
@@ -349,12 +335,6 @@
             color: #38bdf8;
             text-decoration: none;
             font-weight: bold;
-        }
-
-        @media (max-width: 420px) {
-            .candidate-name.main-candidate { font-size: 17px; }
-            .candidate-name { font-size: 16px; }
-            .vote-btn { width: 45px; }
         }
     </style>
 </head>
@@ -386,14 +366,14 @@
                 </div>
             </div>
 
-            <!-- Candidate 2: Malik Mankode (PROMINENT & CLEAR) -->
+            <!-- Candidate 2: Malik Mankode (NO TRUNCATION, CLEAR & FULL) -->
             <div class="candidate-row" style="border: 2px solid #dc2626; background: #fff5f5;">
                 <span class="serial-no" style="color: #dc2626;">2</span>
                 <div class="candidate-info">
                     <span class="candidate-name main-candidate">സ. മാലിക് മാങ്കോട്</span>
                     <div class="party-symbol-container">
                         <!-- LDF Paddy & Sickle Symbol -->
-                        <svg viewBox="0 0 100 100" style="width:38px; height:38px; fill:#dc2626;">
+                        <svg viewBox="0 0 100 100" style="width:34px; height:34px; fill:#dc2626;">
                             <path d="M50 10 C30 30 20 60 30 85 C40 85 70 80 85 50 C70 40 50 10 50 10Z" />
                             <circle cx="45" cy="55" r="22" fill="none" stroke="#dc2626" stroke-width="8"/>
                         </svg>
@@ -462,11 +442,10 @@
     <div id="thanks-container">
         <div class="thanks-badge">✔ വോട്ട് വിജയികരമായി രേഖപ്പെടുത്തി</div>
         <h2>സ. മാലിക് മാങ്കോടിന് നിങ്ങളുടെ വിലയേറിയ വോട്ട് നൽകിയതിന് നന്ദി!</h2>
-        <p style="font-size:14px; color:#64748b; margin-bottom:10px;">ബാലറ്റിൽ രണ്ടാമത്, ജനഹൃദയങ്ങളിൽ ഒന്നാമത്!</p>
+        <p style="font-size:13px; color:#64748b; margin-bottom:10px;">ബാലറ്റിൽ രണ്ടാമത്, ജനഹൃദയങ്ങളിൽ ഒന്നാമത്!</p>
 
         <!-- Campaign Video Player -->
         <div class="video-wrapper">
-             <!-- ഇവിടെ നിങ്ങളുടെ യൂട്യൂബ് പ്രചാരണ വീഡിയോ ID നൽകാവുന്നതാണ് -->
              <iframe id="youtube-player" src="" title="Campaign Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
 
@@ -518,7 +497,7 @@
            oscillator.frequency.setValueAtTime(3000, audioCtx.currentTime);
            gainNode.gain.setValueAtTime(0.08, audioCtx.currentTime);
            oscillator.start();
-           oscillator.stop(audioCtx.currentTime + 2.5); // 2.5 Sec Beep
+           oscillator.stop(audioCtx.currentTime + 2.5);
         }
     }
 
@@ -541,12 +520,10 @@
 
         display.innerHTML = "VOTE RECORDING...";
 
-        // 2.5 സെക്കൻഡിന് ശേഷം വീഡിയോ ഉള്ള സ്ക്രീൻ വരുന്നു
         setTimeout(() => {
             document.getElementById('evm-main-interface').style.display = 'none';
             document.getElementById('thanks-container').style.display = 'block';
             
-            // പ്രചാരണ വീഡിയോ യൂട്യൂബ് ID ഇവിടെ നൽകാം (ഉദാ: fi7ANhu1b7U)
             const videoId = "fi7ANhu1b7U"; 
             document.getElementById('youtube-player').src = "https://www.youtube.com/embed/" + videoId + "?autoplay=1&rel=0&start=0";
             
