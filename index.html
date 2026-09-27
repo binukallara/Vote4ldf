@@ -711,21 +711,26 @@
             candidateRef.transaction((currentVotes) => {
                 return (currentVotes || 0) + 1;
             }, (error, committed, snapshot) => {
-                if (snapshot) {
-                    const totalVotes = snapshot.val();
+                
+                // ഫയർബേസിൽ നിന്ന് എല്ലാ സ്ഥാനാർത്ഥികളുടെയും വോട്ട് കൗണ്ടുകൾ ശേഖരിച്ച് ഒരേസമയം കാണിക്കുന്നു
+                database.ref('votes').once('value').then((allVotesSnapshot) => {
+                    const allVotes = allVotesSnapshot.val() || {};
                     
-                    // അതാത് സ്ഥാനാർത്ഥിയുടെ കോളത്തിൽ തന്നെ വോട്ട് കൗണ്ട് തെളിയിക്കുന്നു
-                    const countBadge = document.getElementById('count-' + id);
-                    if (countBadge) {
-                        countBadge.innerText = totalVotes + " വോട്ട്";
-                        countBadge.style.display = 'inline-block';
+                    for (let i = 1; i <= 16; i++) {
+                        const countVal = allVotes['candidate_' + i] || 0;
+                        const countBadge = document.getElementById('count-' + i);
+                        if (countBadge) {
+                            countBadge.innerText = countVal + " വോട്ട്";
+                            countBadge.style.display = 'inline-block';
+                        }
                     }
-                }
+                });
+
             });
 
             display.innerHTML = "VOTE REGISTERED!";
 
-            // കൗണ്ട് കാണിച്ച ശേഷം 4 സെക്കൻഡ് കഴിഞ്ഞ് താങ്ക്സ് പേജിലേക്ക് മാറി വീഡിയോ പ്ലേ ആകുന്നു
+            // കൗണ്ടുകൾ കാണിച്ച ശേഷം 4 സെക്കൻഡ് കഴിഞ്ഞ് താങ്ക്സ് പേജിലേക്ക് മാറി വീഡിയോ പ്ലേ ആകുന്നു
             setTimeout(() => {
                 document.getElementById('evm-main-interface').style.display = 'none';
                 document.getElementById('thanks-container').style.display = 'block';
@@ -748,7 +753,7 @@
                     videoPlayer.muted = true;
                     videoPlayer.play();
                 });
-            }, 4000); // 4 സെക്കൻഡ് വോട്ട് കൗണ്ട് കാണിച്ച ശേഷം താങ്ക്സ് പേജ് വരും
+            }, 4000); // 4 സെക്കൻഡ് എല്ലാ വോട്ട് കൗണ്ടും കാണിച്ച ശേഷം താങ്ക്സ് പേജ് വരും
 
         }, 2500); // 2.5 സെക്കൻഡ് ബീപ്പ് ടൈമർ
     }
