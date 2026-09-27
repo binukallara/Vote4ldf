@@ -29,7 +29,7 @@
             margin: 0 auto;
         }
 
-        /* EVM Container */
+        /* EVM Main Panel */
         #evm-main-interface {
             border: 5px solid #1e293b;
             background-color: #e2e8f0;
@@ -44,7 +44,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Zilla Panchayat Yellow Theme Banner */
+        /* Zilla Panchayat Header Banner */
         .zp-header-banner {
             background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
             color: #ffffff;
@@ -94,7 +94,7 @@
             border-color: #dc2626 !important;
         }
 
-        /* Ballot Unit Container (Yellow Ballot Paper for Zilla Panchayat) */
+        /* Yellow Ballot Paper Unit (Zilla Panchayat) */
         .ballot-unit {
             background-color: #fef08a; /* Official Yellow Ballot Paper Theme */
             border: 2px solid #ca8a04;
@@ -120,14 +120,10 @@
             margin-bottom: 0;
         }
 
-        .candidate-row:hover {
-            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-        }
-
         .serial-no {
             width: 32px;
             font-weight: 800;
-            font-size: 20px;
+            font-size: 22px;
             color: #1e293b;
             border-right: 2px solid #ca8a04;
             padding-right: 8px;
@@ -137,39 +133,50 @@
         .candidate-info {
             flex-grow: 1;
             padding-left: 12px;
+            padding-right: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             overflow: hidden;
+            height: 100%;
         }
 
+        /* Clearly Visible & Bold Candidate Name */
         .candidate-name {
-            font-size: 16px;
-            font-weight: 700;
+            font-size: 19px;
+            font-weight: 800;
             color: #0f172a;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            letter-spacing: 0.3px;
+        }
+
+        .candidate-name.main-candidate {
+            color: #b91c1c; /* Standout Red for Malik Mankode */
+            font-size: 20px;
         }
 
         .party-symbol-container {
-            width: 42px;
-            height: 42px;
+            width: 44px;
+            height: 44px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 8px;
             flex-shrink: 0;
-            font-size: 24px;
         }
 
-        .party-symbol-img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
+        .nota-box {
+            border: 2px solid #475569;
+            border-radius: 4px;
+            font-weight: 800;
+            font-size: 12px;
+            color: #334155;
+            padding: 2px 6px;
+            background: #f1f5f9;
         }
 
-        /* LED and Button Container */
+        /* Vote Button & LED */
         .vote-btn-container {
             display: flex;
             align-items: center;
@@ -345,7 +352,8 @@
         }
 
         @media (max-width: 420px) {
-            .candidate-name { font-size: 14px; }
+            .candidate-name.main-candidate { font-size: 17px; }
+            .candidate-name { font-size: 16px; }
             .vote-btn { width: 45px; }
         }
     </style>
@@ -366,12 +374,11 @@
         <!-- Ballot Unit Paper (Yellow Theme) -->
         <div class="ballot-unit">
 
-            <!-- Candidate 1 -->
+            <!-- Candidate 1 (EMPTY) -->
             <div class="candidate-row">
                 <span class="serial-no">1</span>
                 <div class="candidate-info">
-                    <span class="candidate-name">സ്ഥാനാർത്ഥി 1</span>
-                    <div class="party-symbol-container">✋</div>
+                    <!-- Blank Name & Symbol -->
                 </div>
                 <div class="vote-btn-container">
                     <div class="led-lamp" id="led-1"></div>
@@ -379,14 +386,14 @@
                 </div>
             </div>
 
-            <!-- Candidate 2: Malik Mankode -->
+            <!-- Candidate 2: Malik Mankode (PROMINENT & CLEAR) -->
             <div class="candidate-row" style="border: 2px solid #dc2626; background: #fff5f5;">
                 <span class="serial-no" style="color: #dc2626;">2</span>
                 <div class="candidate-info">
-                    <span class="candidate-name" style="color: #dc2626;">സ. മാലിക് മാങ്കോട്</span>
+                    <span class="candidate-name main-candidate">സ. മാലിക് മാങ്കോട്</span>
                     <div class="party-symbol-container">
-                        <!-- LDF Sickle, Paddy & Hammer Symbol (SVG) -->
-                        <svg viewBox="0 0 100 100" style="width:36px; height:36px; fill:#dc2626;">
+                        <!-- LDF Paddy & Sickle Symbol -->
+                        <svg viewBox="0 0 100 100" style="width:38px; height:38px; fill:#dc2626;">
                             <path d="M50 10 C30 30 20 60 30 85 C40 85 70 80 85 50 C70 40 50 10 50 10Z" />
                             <circle cx="45" cy="55" r="22" fill="none" stroke="#dc2626" stroke-width="8"/>
                         </svg>
@@ -398,12 +405,11 @@
                 </div>
             </div>
 
-            <!-- Candidate 3 -->
+            <!-- Candidate 3 (EMPTY) -->
             <div class="candidate-row">
                 <span class="serial-no">3</span>
                 <div class="candidate-info">
-                    <span class="candidate-name">സ്ഥാനാർത്ഥി 3</span>
-                    <div class="party-symbol-container">🪷</div>
+                    <!-- Blank Name & Symbol -->
                 </div>
                 <div class="vote-btn-container">
                     <div class="led-lamp" id="led-3"></div>
@@ -411,12 +417,11 @@
                 </div>
             </div>
 
-            <!-- Candidate 4 -->
+            <!-- Candidate 4 (EMPTY) -->
             <div class="candidate-row">
                 <span class="serial-no">4</span>
                 <div class="candidate-info">
-                    <span class="candidate-name">സ്ഥാനാർത്ഥി 4</span>
-                    <div class="party-symbol-container">⭐</div>
+                    <!-- Blank Name & Symbol -->
                 </div>
                 <div class="vote-btn-container">
                     <div class="led-lamp" id="led-4"></div>
@@ -424,12 +429,14 @@
                 </div>
             </div>
 
-            <!-- NOTA -->
+            <!-- Candidate 5: NOTA -->
             <div class="candidate-row">
                 <span class="serial-no">5</span>
                 <div class="candidate-info">
                     <span class="candidate-name">നോട്ട (NOTA)</span>
-                    <div class="party-symbol-container">🚫</div>
+                    <div class="party-symbol-container">
+                        <span class="nota-box">NOTA</span>
+                    </div>
                 </div>
                 <div class="vote-btn-container">
                     <div class="led-lamp" id="led-5"></div>
@@ -454,12 +461,12 @@
     <!-- Thanks Screen & Video Player (Initially Hidden) -->
     <div id="thanks-container">
         <div class="thanks-badge">✔ വോട്ട് വിജയികരമായി രേഖപ്പെടുത്തി</div>
-        <h2>സ. മാലിക് മാങ്കോടിന് നിങ്ങളുടെ വിലയേറിയ വോട്ട് നന്ദി!</h2>
+        <h2>സ. മാലിക് മാങ്കോടിന് നിങ്ങളുടെ വിലയേറിയ വോട്ട് നൽകിയതിന് നന്ദി!</h2>
         <p style="font-size:14px; color:#64748b; margin-bottom:10px;">ബാലറ്റിൽ രണ്ടാമത്, ജനഹൃദയങ്ങളിൽ ഒന്നാമത്!</p>
 
-        <!-- Auto Play Campaign Video -->
+        <!-- Campaign Video Player -->
         <div class="video-wrapper">
-             <!-- ഇവിടെ YOUR_YOUTUBE_VIDEO_ID മാറ്റുക -->
+             <!-- ഇവിടെ നിങ്ങളുടെ യൂട്യൂബ് പ്രചാരണ വീഡിയോ ID നൽകാവുന്നതാണ് -->
              <iframe id="youtube-player" src="" title="Campaign Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
 
@@ -487,7 +494,7 @@
     let hasVoted = false;
     let audioCtx = null;
 
-    // EVM Beep Sound
+    // EVM Beep Sound Function
     function playSound(type) {
         if (!audioCtx) {
             audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -511,7 +518,7 @@
            oscillator.frequency.setValueAtTime(3000, audioCtx.currentTime);
            gainNode.gain.setValueAtTime(0.08, audioCtx.currentTime);
            oscillator.start();
-           oscillator.stop(audioCtx.currentTime + 2.5); // 2.5 സെക്കൻഡ് നീളുന്ന ബീപ് ശബ്ദം
+           oscillator.stop(audioCtx.currentTime + 2.5); // 2.5 Sec Beep
         }
     }
 
@@ -534,19 +541,19 @@
 
         display.innerHTML = "VOTE RECORDING...";
 
-        // 2.5 സെക്കൻഡിന് ശേഷം സ്ക്രീൻ മാറി യൂട്യൂബ് പ്രചാരണ വീഡിയോ പ്ലേ ആകുന്നു
+        // 2.5 സെക്കൻഡിന് ശേഷം വീഡിയോ ഉള്ള സ്ക്രീൻ വരുന്നു
         setTimeout(() => {
             document.getElementById('evm-main-interface').style.display = 'none';
             document.getElementById('thanks-container').style.display = 'block';
             
-            // ഇവിടെ നിങ്ങളുടെ യൂട്യൂബ് വീഡിയോ ID ചേർക്കുക (ഉദാഹരണത്തിന്: fi7ANhu1b7U)
+            // പ്രചാരണ വീഡിയോ യൂട്യൂബ് ID ഇവിടെ നൽകാം (ഉദാ: fi7ANhu1b7U)
             const videoId = "fi7ANhu1b7U"; 
             document.getElementById('youtube-player').src = "https://www.youtube.com/embed/" + videoId + "?autoplay=1&rel=0&start=0";
             
         }, 2500);
     }
 
-    // Reset Function
+    // Reset Machine
     function resetMachine() {
         hasVoted = false;
         const leds = document.querySelectorAll('.led-lamp');
@@ -556,14 +563,12 @@
         display.innerHTML = "READY TO VOTE";
         display.classList.remove('error-msg');
 
-        // Stop video on reset
         document.getElementById('youtube-player').src = "";
-
         document.getElementById('evm-main-interface').style.display = 'block';
         document.getElementById('thanks-container').style.display = 'none';
     }
 
-    // Sharing Logic
+    // Share Links Logic
     window.onload = function() {
         const pageUrl = encodeURIComponent(window.location.href);
         const pageTitle = encodeURIComponent("തിരുവനന്തപുരം ജില്ലാ പഞ്ചായത്ത് കല്ലറ ഡിവിഷൻ മാതൃകാ വോട്ടിങ് മെഷീനിൽ വോട്ട് ചെയ്തു നോക്കൂ!");
