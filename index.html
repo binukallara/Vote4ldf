@@ -254,12 +254,10 @@
             border: 1px solid #86efac;
         }
 
+        /* Native HTML5 Video Wrapper */
         .video-wrapper {
             margin: 12px 0;
             width: 100%;
-            height: 0;
-            padding-bottom: 56.25%;
-            position: relative;
             border-radius: 12px;
             overflow: hidden;
             border: 3px solid #1e293b;
@@ -267,11 +265,11 @@
             box-shadow: 0 6px 12px rgba(0,0,0,0.2);
         }
         
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            border: 0;
+        .video-wrapper video {
+            width: 100%;
+            max-height: 450px;
+            display: block;
+            outline: none;
         }
 
         .reset-btn {
@@ -440,15 +438,15 @@
 
     </div>
 
-    <!-- Thanks Screen & Video Player (Initially Hidden) -->
+    <!-- Thanks Screen & MP4 Video Player (Initially Hidden) -->
     <div id="thanks-container">
         <div class="thanks-badge">✔ വോട്ട് വിജയികരമായി രേഖപ്പെടുത്തി</div>
         <h2>സ. മാലിക് മാങ്കോടിന് നിങ്ങളുടെ വിലയേറിയ വോട്ട് നൽകിയതിന് നന്ദി!</h2>
         <p style="font-size:13px; color:#64748b; margin-bottom:10px;">ബാലറ്റിൽ രണ്ടാമത്, ജനഹൃദയങ്ങളിൽ ഒന്നാമത്!</p>
 
-        <!-- Campaign Video Player -->
+        <!-- HTML5 MP4 Video Player -->
         <div class="video-wrapper">
-             <iframe id="youtube-player" src="" title="Campaign Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+             <video id="mp4-player" controls autoplay playsinline muted></video>
         </div>
 
         <button class="reset-btn" onclick="resetMachine()">വീണ്ടും വോട്ട് ചെയ്യാൻ</button>
@@ -526,9 +524,17 @@
             document.getElementById('evm-main-interface').style.display = 'none';
             document.getElementById('thanks-container').style.display = 'block';
             
-            // Updated YouTube Shorts Video ID: zKKpzV7p-3M
-            const videoId = "zKKpzV7p-3M"; 
-            document.getElementById('youtube-player').src = "https://www.youtube.com/embed/" + videoId + "?autoplay=1&rel=0";
+            // Raw GitHub MP4 Video Stream Link
+            const videoPlayer = document.getElementById('mp4-player');
+            videoPlayer.src = "https://raw.githubusercontent.com/binukallara/Vote4ldf/main/പുതിയ%20ചിന്തകൾ%20ഉറച്ച%20ചുവടുകൾ%20❤%EF%B8%8F.mp4";
+            
+            // Unmute & Play
+            videoPlayer.muted = false;
+            videoPlayer.play().catch(() => {
+                // Browsers block autoplay with sound sometimes, fall back to muted autoplay
+                videoPlayer.muted = true;
+                videoPlayer.play();
+            });
             
         }, 2500);
     }
@@ -543,7 +549,10 @@
         display.innerHTML = "READY TO VOTE";
         display.classList.remove('error-msg');
 
-        document.getElementById('youtube-player').src = "";
+        const videoPlayer = document.getElementById('mp4-player');
+        videoPlayer.pause();
+        videoPlayer.src = "";
+
         document.getElementById('evm-main-interface').style.display = 'block';
         document.getElementById('thanks-container').style.display = 'none';
     }
