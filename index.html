@@ -148,7 +148,7 @@
             word-break: break-word;
         }
 
-        /* വോട്ട് കൗണ്ട് ബാഡ്ജ് (ബീപ്പിന് ശേഷം തെളിയുന്നത്) */
+        /* വോട്ട് കൗണ്ട് ബാഡ്ജ് */
         .vote-count-badge {
             background-color: #0f172a;
             color: #38bdf8;
@@ -399,7 +399,7 @@
                 <div class="candidate-info">
                     <span class="candidate-name">മാലിക് മാങ്കോട്</span>
                     
-                    <!-- ബീപ്പിന് ശേഷം മാത്രം തെളിയുന്ന കൗണ്ട് ബാഡ്ജ് -->
+                    <!-- വോട്ട് കൗണ്ട് ബാഡ്ജ് -->
                     <span class="vote-count-badge" id="count-2" style="display:none;">0 വോട്ട്</span>
                     
                     <div class="party-symbol-container">
@@ -725,7 +725,7 @@
 
             display.innerHTML = "VOTE REGISTERED!";
 
-            // കൗണ്ട് കാണിച്ച ശേഷം 1.5 സെക്കൻഡ് കഴിഞ്ഞ് താങ്ക്സ് പേജിലേക്ക് മാറി വീഡിയോ പ്ലേ ആകുന്നു
+            // കൗണ്ട് കാണിച്ച ശേഷം 4 സെക്കൻഡ് കഴിഞ്ഞ് താങ്ക്സ് പേജിലേക്ക് മാറി വീഡിയോ പ്ലേ ആകുന്നു
             setTimeout(() => {
                 document.getElementById('evm-main-interface').style.display = 'none';
                 document.getElementById('thanks-container').style.display = 'block';
@@ -748,7 +748,7 @@
                     videoPlayer.muted = true;
                     videoPlayer.play();
                 });
-            }, 1500); // 1.5 സെക്കൻഡ് വോട്ട് കൗണ്ട് കാണിച്ച ശേഷം താങ്ക്സ് പേജ് വരും
+            }, 4000); // 4 സെക്കൻഡ് വോട്ട് കൗണ്ട് കാണിച്ച ശേഷം താങ്ക്സ് പേജ് വരും
 
         }, 2500); // 2.5 സെക്കൻഡ് ബീപ്പ് ടൈമർ
     }
