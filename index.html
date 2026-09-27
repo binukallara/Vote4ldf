@@ -44,7 +44,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Zilla Panchayat Red Header Banner */
+        /* Header Banner */
         .zp-header-banner {
             background: linear-gradient(135deg, #ef4444 0%, #991b1b 100%);
             color: #ffffff;
@@ -148,6 +148,26 @@
             word-break: break-word;
         }
 
+        /* വോട്ട് കൗണ്ട് ബാഡ്ജ് (ബീപ്പിന് ശേഷം തെളിയുന്നത്) */
+        .vote-count-badge {
+            background-color: #0f172a;
+            color: #38bdf8;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 800;
+            margin: 0 6px;
+            white-space: nowrap;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            border: 1px solid #38bdf8;
+            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
         .party-symbol-container {
             width: 34px;
             height: 34px;
@@ -174,7 +194,7 @@
             background: #f1f5f9;
         }
 
-        /* Vote Button & LED Container */
+        /* Vote Button & LED */
         .vote-btn-container {
             display: flex;
             align-items: center;
@@ -218,7 +238,7 @@
             box-shadow: 0 1px 0 #1e3a8a, 0 2px 3px rgba(0,0,0,0.2);
         }
 
-        /* Thanks Screen & Live Result Display */
+        /* Thanks Screen Container */
         #thanks-container {
             display: none;
             text-align: center;
@@ -249,31 +269,6 @@
             margin-bottom: 12px;
             font-size: 13px;
             border: 1px solid #86efac;
-        }
-
-        /* വോട്ട് കൗണ്ടിംഗ് കാണിക്കുന്ന ബോക്സ് */
-        .vote-count-card {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            color: #ffffff;
-            border: 2px solid #0284c7;
-            border-radius: 12px;
-            padding: 10px 16px;
-            margin: 12px 0;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
-        }
-
-        .vote-count-card .count-label {
-            font-size: 13px;
-            color: #94a3b8;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .vote-count-card .count-number {
-            font-size: 26px;
-            font-weight: 900;
-            color: #38bdf8;
-            margin-top: 2px;
         }
 
         .video-wrapper {
@@ -383,13 +378,15 @@
       
         <div class="digital-screen" id="status-display">READY TO VOTE</div>
 
-        <!-- Ballot Unit Paper (Without inside vote counts) -->
+        <!-- Ballot Unit Paper -->
         <div class="ballot-unit">
 
             <!-- Candidate 1 -->
             <div class="candidate-row">
                 <span class="serial-no">1</span>
-                <div class="candidate-info"></div>
+                <div class="candidate-info">
+                    <span class="vote-count-badge" id="count-1" style="display:none;">0 വോട്ട്</span>
+                </div>
                 <div class="vote-btn-container">
                     <div class="led-lamp" id="led-1"></div>
                     <button class="vote-btn" onclick="castVote(1)"></button>
@@ -401,6 +398,10 @@
                 <span class="serial-no" style="color: #dc2626; border-right-color: #fca5a5;">2</span>
                 <div class="candidate-info">
                     <span class="candidate-name">മാലിക് മാങ്കോട്</span>
+                    
+                    <!-- ബീപ്പിന് ശേഷം മാത്രം തെളിയുന്ന കൗണ്ട് ബാഡ്ജ് -->
+                    <span class="vote-count-badge" id="count-2" style="display:none;">0 വോട്ട്</span>
+                    
                     <div class="party-symbol-container">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/CPI_symbol.svg" alt="CPI Symbol">
                     </div>
@@ -414,7 +415,9 @@
             <!-- Candidate 3 -->
             <div class="candidate-row">
                 <span class="serial-no">3</span>
-                <div class="candidate-info"></div>
+                <div class="candidate-info">
+                    <span class="vote-count-badge" id="count-3" style="display:none;">0 വോട്ട്</span>
+                </div>
                 <div class="vote-btn-container">
                     <div class="led-lamp" id="led-3"></div>
                     <button class="vote-btn" onclick="castVote(3)"></button>
@@ -424,7 +427,9 @@
             <!-- Candidate 4 -->
             <div class="candidate-row">
                 <span class="serial-no">4</span>
-                <div class="candidate-info"></div>
+                <div class="candidate-info">
+                    <span class="vote-count-badge" id="count-4" style="display:none;">0 വോട്ട്</span>
+                </div>
                 <div class="vote-btn-container">
                     <div class="led-lamp" id="led-4"></div>
                     <button class="vote-btn" onclick="castVote(4)"></button>
@@ -434,7 +439,9 @@
             <!-- Candidate 5 -->
             <div class="candidate-row">
                 <span class="serial-no">5</span>
-                <div class="candidate-info"></div>
+                <div class="candidate-info">
+                    <span class="vote-count-badge" id="count-5" style="display:none;">0 വോട്ട്</span>
+                </div>
                 <div class="vote-btn-container">
                     <div class="led-lamp" id="led-5"></div>
                     <button class="vote-btn" onclick="castVote(5)"></button>
@@ -444,7 +451,9 @@
             <!-- Candidate 6 -->
             <div class="candidate-row">
                 <span class="serial-no">6</span>
-                <div class="candidate-info"></div>
+                <div class="candidate-info">
+                    <span class="vote-count-badge" id="count-6" style="display:none;">0 വോട്ട്</span>
+                </div>
                 <div class="vote-btn-container">
                     <div class="led-lamp" id="led-6"></div>
                     <button class="vote-btn" onclick="castVote(6)"></button>
@@ -454,7 +463,9 @@
             <!-- Candidate 7 -->
             <div class="candidate-row">
                 <span class="serial-no">7</span>
-                <div class="candidate-info"></div>
+                <div class="candidate-info">
+                    <span class="vote-count-badge" id="count-7" style="display:none;">0 വോട്ട്</span>
+                </div>
                 <div class="vote-btn-container">
                     <div class="led-lamp" id="led-7"></div>
                     <button class="vote-btn" onclick="castVote(7)"></button>
@@ -464,7 +475,9 @@
             <!-- Candidate 8 -->
             <div class="candidate-row">
                 <span class="serial-no">8</span>
-                <div class="candidate-info"></div>
+                <div class="candidate-info">
+                    <span class="vote-count-badge" id="count-8" style="display:none;">0 വോട്ട്</span>
+                </div>
                 <div class="vote-btn-container">
                     <div class="led-lamp" id="led-8"></div>
                     <button class="vote-btn" onclick="castVote(8)"></button>
@@ -474,7 +487,9 @@
             <!-- Candidate 9 -->
             <div class="candidate-row">
                 <span class="serial-no">9</span>
-                <div class="candidate-info"></div>
+                <div class="candidate-info">
+                    <span class="vote-count-badge" id="count-9" style="display:none;">0 വോട്ട്</span>
+                </div>
                 <div class="vote-btn-container">
                     <div class="led-lamp" id="led-9"></div>
                     <button class="vote-btn" onclick="castVote(9)"></button>
@@ -484,7 +499,9 @@
             <!-- Candidate 10 -->
             <div class="candidate-row">
                 <span class="serial-no">10</span>
-                <div class="candidate-info"></div>
+                <div class="candidate-info">
+                    <span class="vote-count-badge" id="count-10" style="display:none;">0 വോട്ട്</span>
+                </div>
                 <div class="vote-btn-container">
                     <div class="led-lamp" id="led-10"></div>
                     <button class="vote-btn" onclick="castVote(10)"></button>
@@ -494,7 +511,9 @@
             <!-- Candidate 11 -->
             <div class="candidate-row">
                 <span class="serial-no">11</span>
-                <div class="candidate-info"></div>
+                <div class="candidate-info">
+                    <span class="vote-count-badge" id="count-11" style="display:none;">0 വോട്ട്</span>
+                </div>
                 <div class="vote-btn-container">
                     <div class="led-lamp" id="led-11"></div>
                     <button class="vote-btn" onclick="castVote(11)"></button>
@@ -504,7 +523,9 @@
             <!-- Candidate 12 -->
             <div class="candidate-row">
                 <span class="serial-no">12</span>
-                <div class="candidate-info"></div>
+                <div class="candidate-info">
+                    <span class="vote-count-badge" id="count-12" style="display:none;">0 വോട്ട്</span>
+                </div>
                 <div class="vote-btn-container">
                     <div class="led-lamp" id="led-12"></div>
                     <button class="vote-btn" onclick="castVote(12)"></button>
@@ -514,7 +535,9 @@
             <!-- Candidate 13 -->
             <div class="candidate-row">
                 <span class="serial-no">13</span>
-                <div class="candidate-info"></div>
+                <div class="candidate-info">
+                    <span class="vote-count-badge" id="count-13" style="display:none;">0 വോട്ട്</span>
+                </div>
                 <div class="vote-btn-container">
                     <div class="led-lamp" id="led-13"></div>
                     <button class="vote-btn" onclick="castVote(13)"></button>
@@ -524,7 +547,9 @@
             <!-- Candidate 14 -->
             <div class="candidate-row">
                 <span class="serial-no">14</span>
-                <div class="candidate-info"></div>
+                <div class="candidate-info">
+                    <span class="vote-count-badge" id="count-14" style="display:none;">0 വോട്ട്</span>
+                </div>
                 <div class="vote-btn-container">
                     <div class="led-lamp" id="led-14"></div>
                     <button class="vote-btn" onclick="castVote(14)"></button>
@@ -534,7 +559,9 @@
             <!-- Candidate 15 -->
             <div class="candidate-row">
                 <span class="serial-no">15</span>
-                <div class="candidate-info"></div>
+                <div class="candidate-info">
+                    <span class="vote-count-badge" id="count-15" style="display:none;">0 വോട്ട്</span>
+                </div>
                 <div class="vote-btn-container">
                     <div class="led-lamp" id="led-15"></div>
                     <button class="vote-btn" onclick="castVote(15)"></button>
@@ -546,6 +573,7 @@
                 <span class="serial-no">16</span>
                 <div class="candidate-info">
                     <span class="candidate-name">നോട്ട (NOTA)</span>
+                    <span class="vote-count-badge" id="count-16" style="display:none;">0 വോട്ട്</span>
                     <div class="party-symbol-container">
                         <span class="nota-box">NOTA</span>
                     </div>
@@ -558,7 +586,7 @@
 
         </div>
 
-        <!-- Share Section on Main EVM -->
+        <!-- Share Section -->
         <div class="share-section">
             <div class="share-title">ഈ മാതൃകാ വോട്ടിങ് മെഷീൻ പങ്കുവെക്കൂ:</div>
             <div class="share-buttons-row">
@@ -570,20 +598,13 @@
 
     </div>
 
-    <!-- Thanks Screen & Result Display (Show after beep sound) -->
+    <!-- Thanks Screen -->
     <div id="thanks-container">
         <div class="thanks-badge">✔ വോട്ട് വിജയകരമായി രേഖപ്പെടുത്തി</div>
         <h2>മാലിക് മാങ്കോടിന് നിങ്ങളുടെ വിലയേറിയ വോട്ട് നൽകിയതിന് നന്ദി!</h2>
-        
-        <!-- ബീപ്പ് സൗണ്ടിന് ശേഷം വോട്ട് കൗണ്ട് കാണിക്കുന്ന ബോക്സ് -->
-        <div class="vote-count-card">
-            <div class="count-label">നിങ്ങളുടെ വോട്ട് ഉൾപ്പെടെ ലഭിച്ച ആകെ വോട്ടുകൾ:</div>
-            <div class="count-number" id="result-count-display">--</div>
-        </div>
+        <p style="font-size:13px; color:#64748b; margin-bottom:12px;">ബാലറ്റിൽ രണ്ടാമത്, ജനഹൃദയങ്ങളിൽ ഒന്നാമത്!</p>
 
-        <p style="font-size:13px; color:#64748b; margin-bottom:10px;">ബാലറ്റിൽ രണ്ടാമത്, ജനഹൃദയങ്ങളിൽ ഒന്നാമത്!</p>
-
-        <!-- Video & End Banner Image Wrapper -->
+        <!-- Video & Poster Wrapper -->
         <div class="video-wrapper">
              <video id="mp4-player" controls autoplay playsinline muted></video>
              <img id="end-banner-img" src="https://raw.githubusercontent.com/binukallara/Vote4ldf/refs/heads/main/1790415548160.png" alt="Election Poster">
@@ -633,7 +654,7 @@
     let hasVoted = false;
     let audioCtx = null;
 
-    // EVM Beep Sound Function (2.5 Seconds Duration)
+    // Beep Sound (2.5 Seconds Duration)
     function playSound(type) {
         if (!audioCtx) {
             audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -657,7 +678,7 @@
            oscillator.frequency.setValueAtTime(3000, audioCtx.currentTime);
            gainNode.gain.setValueAtTime(0.08, audioCtx.currentTime);
            oscillator.start();
-           oscillator.stop(audioCtx.currentTime + 2.5); // 2.5 സെക്കൻഡ് ബീപ് സൗണ്ട്
+           oscillator.stop(audioCtx.currentTime + 2.5); // 2.5 സെക്കൻഡ് ബീപ്പ് സൗണ്ട്
         }
     }
 
@@ -674,61 +695,76 @@
 
         hasVoted = true;
 
-        // 1. റെഡ് ലൈറ്റ് (LED) ഓണാക്കുന്നു
+        // 1. LED ലൈറ്റ് ഓൺ ചെയ്യുന്നു
         const led = document.getElementById('led-' + id);
         if(led) led.classList.add('led-on');
 
         display.innerHTML = "VOTE RECORDING...";
 
-        // 2. ബീപ് സൗണ്ട് പ്ലേ ചെയ്യാൻ തുടങ്ങുന്നു
+        // 2. ബീപ്പ് സൗണ്ട് പ്ലേ ചെയ്യുന്നു (2.5 സെക്കൻഡ്)
         playSound('success');
 
-        // 3. ബീപ് സൗണ്ട് അവസാനിച്ചതിന് ശേഷം മാത്രം (2.5 സെക്കൻഡ് താമസം)
+        // 3. ബീപ്പ് സൗണ്ട് പൂർത്തിയായ ശേഷം (2.5 സെക്കൻഡിന് ശേഷം)
         setTimeout(() => {
-            // Firebase-ൽ കൗണ്ട് കൂട്ടുകയും അപ്ഡേറ്റ് ചെയ്ത വോട്ട് സംഖ്യ നേടുകയും ചെയ്യുന്നു
+            // ഫയർബേസിൽ വോട്ട് കൗണ്ട് അപ്‌ഡേറ്റ് ചെയ്യുന്നു
             const candidateRef = database.ref('votes/candidate_' + id);
             candidateRef.transaction((currentVotes) => {
                 return (currentVotes || 0) + 1;
             }, (error, committed, snapshot) => {
                 if (snapshot) {
                     const totalVotes = snapshot.val();
-                    document.getElementById('result-count-display').innerText = totalVotes + " വോട്ടുകൾ";
+                    
+                    // അതാത് സ്ഥാനാർത്ഥിയുടെ കോളത്തിൽ തന്നെ വോട്ട് കൗണ്ട് തെളിയിക്കുന്നു
+                    const countBadge = document.getElementById('count-' + id);
+                    if (countBadge) {
+                        countBadge.innerText = totalVotes + " വോട്ട്";
+                        countBadge.style.display = 'inline-block';
+                    }
                 }
             });
 
-            // മെയിൻ വോട്ടിങ് വിൻഡോ മറച്ച് താങ്ക്സ് പേജിലേക്ക് മാറ്റുന്നു
-            document.getElementById('evm-main-interface').style.display = 'none';
-            document.getElementById('thanks-container').style.display = 'block';
-            
-            // വീഡിയോയും ഫോട്ടോയും ലോഡ് ചെയ്തു പ്ലേ ചെയ്യുന്നു
-            const videoPlayer = document.getElementById('mp4-player');
-            const endBanner = document.getElementById('end-banner-img');
+            display.innerHTML = "VOTE REGISTERED!";
 
-            videoPlayer.style.display = 'block';
-            endBanner.style.display = 'none';
-            
-            videoPlayer.src = "https://raw.githubusercontent.com/binukallara/Vote4ldf/main/പുതിയ%20ചിന്തകൾ%20ഉറച്ച%20ചുവടുകൾ%20❤%EF%B8%8F.mp4";
-            
-            videoPlayer.onended = function() {
-                videoPlayer.style.display = 'none';
-                endBanner.style.display = 'block';
-            };
+            // കൗണ്ട് കാണിച്ച ശേഷം 1.5 സെക്കൻഡ് കഴിഞ്ഞ് താങ്ക്സ് പേജിലേക്ക് മാറി വീഡിയോ പ്ലേ ആകുന്നു
+            setTimeout(() => {
+                document.getElementById('evm-main-interface').style.display = 'none';
+                document.getElementById('thanks-container').style.display = 'block';
+                
+                const videoPlayer = document.getElementById('mp4-player');
+                const endBanner = document.getElementById('end-banner-img');
 
-            videoPlayer.muted = false;
-            videoPlayer.play().catch(() => {
-                videoPlayer.muted = true;
-                videoPlayer.play();
-            });
-            
-        }, 2500); // 2.5 സെക്കൻഡ് ബീപ്പിന് ശേഷം കൗണ്ടിംഗും വീഡിയോയും വരുന്നു
+                videoPlayer.style.display = 'block';
+                if(endBanner) endBanner.style.display = 'none';
+                
+                videoPlayer.src = "https://raw.githubusercontent.com/binukallara/Vote4ldf/main/പുതിയ%20ചിന്തകൾ%20ഉറച്ച%20ചുവടുകൾ%20❤%EF%B8%8F.mp4";
+                
+                videoPlayer.onended = function() {
+                    videoPlayer.style.display = 'none';
+                    if(endBanner) endBanner.style.display = 'block';
+                };
+
+                videoPlayer.muted = false;
+                videoPlayer.play().catch(() => {
+                    videoPlayer.muted = true;
+                    videoPlayer.play();
+                });
+            }, 1500); // 1.5 സെക്കൻഡ് വോട്ട് കൗണ്ട് കാണിച്ച ശേഷം താങ്ക്സ് പേജ് വരും
+
+        }, 2500); // 2.5 സെക്കൻഡ് ബീപ്പ് ടൈമർ
     }
 
     // Reset Machine Function
     function resetMachine() {
         hasVoted = false;
+        
+        // LED ഓഫ് ചെയ്യുന്നു
         const leds = document.querySelectorAll('.led-lamp');
         leds.forEach(led => led.classList.remove('led-on'));
         
+        // വോട്ട് കൗണ്ട് ബാഡ്ജുകൾ മറയ്ക്കുന്നു
+        const badges = document.querySelectorAll('.vote-count-badge');
+        badges.forEach(badge => badge.style.display = 'none');
+
         const display = document.getElementById('status-display');
         display.innerHTML = "READY TO VOTE";
         display.classList.remove('error-msg');
