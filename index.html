@@ -3,423 +3,539 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sample Voting Machine - Malik Mankode</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;600;700&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+    <title>Kallara Panchayat Election - Sample Voting Machine</title>
     <style>
-        :root {
-            --primary-blue: #2b5c8f;
-            --ldf-red: #e63946;
-            --bg-gradient: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #a1c4fd 100%);
-        }
-
+        /* Basic Setup */
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', 'Noto Sans Malayalam', sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
         }
 
         body {
-            background: var(--bg-gradient);
+            background-color: #eef2f7;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 10px;
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            overflow-x: hidden;
         }
 
-        .machine-container {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(15px);
-            border-radius: 20px;
-            padding: 25px;
+        /* EVM Container */
+        #evm-app {
             width: 100%;
-            max-width: 480px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
-            transition: all 0.5s ease;
-            position: relative;
-            z-index: 10;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        .machine-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #eee;
-        }
-
-        .ready-indicator {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 600;
-            color: #333;
-            font-size: 14px;
-        }
-
-        .green-light {
-            width: 12px;
-            height: 12px;
-            background-color: #00e676;
-            border-radius: 50%;
-            box-shadow: 0 0 10px #00e676;
-            animation: pulse-green 2s infinite;
-        }
-
-        .ballot-title {
-            font-weight: 700;
-            color: #555;
-            font-size: 14px;
-        }
-
-        .candidate-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #f8f9fa;
+        #evm-main-interface {
+            border: 6px solid #333;
+            background-color: #f0f0f0;
             padding: 15px;
             border-radius: 12px;
-            margin-bottom: 12px;
-            border: 1px solid #e9ecef;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Thanks Screen & Video */
+        #thanks-container {
+            display: none;
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 600px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        #thanks-container img.thanks-img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 2px solid #0059b3;
+            max-height: 300px;
+            object-fit: cover;
+        }
+
+        #thanks-container h2 {
+            color: #0059b3;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        /* Video Player Styling (YouTube) */
+        .video-wrapper {
+            margin-top: 15px;
+            margin-bottom: 15px;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 3px solid #333;
+            background: #000;
+        }
+        
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Header & Screen */
+        .evm-header {
+            text-align: center;
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 1em;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .digital-screen {
+            background-color: #222;
+            color: #39ff14;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 4px solid #555;
+            border-radius: 4px;
+            text-transform: uppercase;
+            box-shadow: inset 0 0 10px rgba(57, 255, 20, 0.3);
             transition: all 0.3s ease;
         }
 
-        .candidate-row:last-of-type {
-            margin-bottom: 20px;
+        .error-msg {
+            color: #ff3333 !important;
+            text-shadow: 0 0 5px rgba(255, 51, 51, 0.5);
+            border-color: #ff3333 !important;
+            box-shadow: inset 0 0 10px rgba(255, 51, 51, 0.3) !important;
+        }
+
+        /* Candidates Row */
+        .candidate-row {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(to bottom, #ffffff, #f2f2f2);
+            border: 1px solid #999;
+            margin-bottom: 8px;
+            padding: 5px 10px;
+            height: 60px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .candidate-row:hover {
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .serial-no {
+            width: 30px;
+            font-weight: 800;
+            font-size: 18px;
+            color: #333;
+            border-right: 2px solid #555;
+            padding-right: 8px;
+            text-align: center;
         }
 
         .candidate-info {
+            flex-grow: 1;
+            padding-left: 12px;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 15px;
-        }
-
-        .serial-number {
-            font-weight: 700;
-            font-size: 18px;
-            color: #333;
-            min-width: 20px;
-        }
-
-        .candidate-details {
-            display: flex;
-            flex-direction: column;
+            overflow: hidden;
         }
 
         .candidate-name {
-            font-weight: 700;
             font-size: 16px;
+            font-weight: bold;
             color: #222;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 180px;
         }
 
         .party-symbol {
-            font-size: 20px;
-            margin-top: 2px;
+            font-size: 24px;
+            margin-right: 5px;
+            flex-shrink: 0;
+        }
+        
+        .party-symbol-img {
+            width: 30px;
+            height: auto;
+            margin-right: 5px;
+            flex-shrink: 0;
         }
 
-        .vote-btn-wrapper {
+        /* Buttons & LED */
+        .vote-btn-container {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 10px;
+            margin-left: auto;
+            flex-shrink: 0;
         }
 
-        .vote-button {
-            width: 70px;
-            height: 40px;
-            background: var(--primary-blue);
-            border: none;
-            border-radius: 20px;
+        .led-lamp {
+            width: 15px;
+            height: 15px;
+            background-color: #300;
+            border-radius: 50%;
+            margin-right: 12px;
+            border: 2px solid #222;
+            transition: all 0.2s ease;
+        }
+
+        .led-on {
+            background-color: #ff0000;
+            box-shadow: 0 0 10px #ff0000;
+            border-color: #cc0000;
+        }
+
+        .vote-btn {
+            width: 50px;
+            height: 30px;
+            background: linear-gradient(to bottom, #0066cc 0%, #003366 100%);
+            border-radius: 6px;
+            border: 2px solid #002244;
             cursor: pointer;
-            position: relative;
-            box-shadow: 0 4px 15px rgba(43, 92, 143, 0.4);
-            transition: all 0.3s ease;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+            transition: all 0.1s ease;
         }
 
-        .vote-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(43, 92, 143, 0.6);
+        .vote-btn:active {
+            transform: scale(0.95);
+            background: linear-gradient(to bottom, #003366 0%, #002244 100%);
         }
 
-        .vote-button:active {
-            transform: translateY(2px);
-            box-shadow: 0 2px 10px rgba(43, 92, 143, 0.4);
-        }
-
-        .vote-button:disabled {
-            opacity: 0.5;
+        .vote-btn:disabled {
+            opacity: 0.6;
             cursor: not-allowed;
             transform: none;
-            box-shadow: none;
         }
 
-        .red-light {
-            width: 14px;
-            height: 14px;
+        .reset-btn {
+            display: block;
+            margin: 20px auto 0;
+            padding: 10px 25px;
             background-color: #555;
-            border-radius: 50%;
-            transition: all 0.3s ease;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background 0.3s;
         }
 
-        .red-light.active {
-            background-color: #ff0000;
-            box-shadow: 0 0 15px #ff0000;
-            animation: pulse-red 1s infinite;
+        .reset-btn:hover {
+            background-color: #333;
         }
 
-        .result-section {
-            display: none;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            margin-top: 20px;
-        }
-
-        .result-section.show {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .video-container {
-            width: 100%;
-            border-radius: 15px;
-            overflow: hidden;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            background: #000;
-        }
-
-        video {
-            width: 100%;
-            display: block;
-            border-radius: 15px;
-        }
-
-        .share-container {
+        /* Share Buttons Styling */
+        .share-section {
+            margin-top: 25px;
+            border-top: 2px dashed #999;
+            padding-top: 15px;
             text-align: center;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 15px;
-            border: 1px solid rgba(255,255,255,0.5);
         }
-
+        
         .share-title {
             font-size: 14px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 15px;
+            color: #555;
+            margin-bottom: 10px;
+            font-weight: bold;
         }
 
-        .share-buttons {
+        .share-buttons-row {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 10px;
             flex-wrap: wrap;
         }
 
         .share-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 10px 20px;
-            border-radius: 30px;
             text-decoration: none;
+            padding: 8px 15px;
             color: white;
-            font-size: 14px;
-            font-weight: 600;
-            transition: all 0.3s ease;
+            border-radius: 5px;
+            font-size: 13px;
+            font-weight: bold;
+            display: inline-block;
+            transition: opacity 0.2s;
             border: none;
             cursor: pointer;
         }
+        
+        .share-btn:hover { opacity: 0.8; }
+        
+        .whatsapp { background-color: #25D366; }
+        .facebook { background-color: #1877F2; }
+        .telegram { background-color: #0088cc; }
 
-        .share-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        .btn-whatsapp { background: #25D366; }
-        .btn-facebook { background: #1877F2; }
-        .btn-telegram { background: #0088cc; }
-
-        .thank-you-msg {
+        /* Footer */
+        .footer-copyright {
             text-align: center;
-            font-size: 18px;
-            font-weight: 700;
-            color: #2b5c8f;
-            margin-bottom: 15px;
-            display: none;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #777;
         }
 
-        .thank-you-msg.show {
-            display: block;
+        .footer-copyright a {
+            color: #0059b3;
+            text-decoration: none;
         }
 
-        @keyframes pulse-green {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 230, 118, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(0, 230, 118, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 230, 118, 0); }
-        }
-
-        @keyframes pulse-red {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(255, 0, 0, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
-        }
-
-        .fade-out {
-            opacity: 0;
-            transform: scale(0.95);
-            pointer-events: none;
+        @media (max-width: 360px) {
+            .candidate-name { font-size: 14px; max-width: 110px; }
+            .party-symbol { font-size: 20px; }
+            .vote-btn { width: 40px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="machine-container" id="votingMachine">
-        <!-- Header -->
-        <div class="machine-header">
-            <div class="ready-indicator">
-                Ready <span class="green-light"></span>
-            </div>
-            <div class="ballot-title">Ballot Unit</div>
+<div id="evm-app">
+    
+    <!-- Main EVM Interface -->
+    <div id="evm-main-interface">
+      <div class="evm-header">KALLARA PANCHAYAT ELECTION DEMO VOTE</div>
+      <div class="evm-header">വാർഡ് - 4, തുപ്പസഗിരി</div>
+      
+      <div class="digital-screen" id="status-display">READY TO VOTE</div>
+
+      <!-- Candidate 1 -->
+      <div class="candidate-row">
+        <span class="serial-no">1</span>
+        <div class="candidate-info">
+          <span class="candidate-name">സ്ഥാനാർത്ഥി 1</span>
+          <span class="party-symbol">🌾</span>
+        </div>
+        <div class="vote-btn-container">
+            <div class="led-lamp" id="led-1"></div>
+            <button class="vote-btn" onclick="castVote(1)"></button>
+        </div>
+      </div>
+
+      <!-- Candidate 2 -->
+      <div class="candidate-row">
+        <span class="serial-no">2</span>
+        <div class="candidate-info">
+          <span class="candidate-name">സ്ഥാനാർത്ഥി 2</span>
+          <span class="party-symbol">🖐</span>
+        </div>
+        <div class="vote-btn-container">
+            <div class="led-lamp" id="led-2"></div>
+            <button class="vote-btn" onclick="castVote(2)"></button>
+        </div>
+      </div>
+
+      <!-- Candidate 3 -->
+      <div class="candidate-row">
+        <span class="serial-no">3</span>
+        <div class="candidate-info">
+          <span class="candidate-name">സ്ഥാനാർത്ഥി 3</span>
+          <span class="party-symbol">⭐</span>
+        </div>
+        <div class="vote-btn-container">
+            <div class="led-lamp" id="led-3"></div>
+            <button class="vote-btn" onclick="castVote(3)"></button>
+        </div>
+      </div>
+      
+      <!-- Candidate 4 (With Image Symbol) -->
+      <div class="candidate-row">
+        <span class="serial-no">4</span>
+        <div class="candidate-info">
+          <span class="candidate-name">ഒ.കെ. സഹീദ</span>
+          <!-- താങ്കളുടെ ചിത്രത്തിന്റെ ലിങ്ക് ഇവിടെ നൽകുക -->
+          <img alt="Symbol" class="party-symbol-img" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhX06fPMcTWhc3UnrEVw8vUDUJ-ReLJ1ChBhihqDsM4CMrp3hNX-Y5YWkF5LGpd2tD6yrasNpSOJkB8XF_qHvL-dn0M6JKERn6nGMiV4aNL7e-VFbTJeeWuQYBDkoRRiD-UI-p1MluwEceqvfseJDaFZ2ppzoujjkj2RpyCkGSmXfNcK3rVaa1Yvhg7jAQ/s320/1000749404.png"/>
+        </div>
+        <div class="vote-btn-container">
+            <div class="led-lamp" id="led-4"></div>
+            <button class="vote-btn" onclick="castVote(4)"></button>
+        </div>
+      </div>
+
+      <!-- NOTA -->
+      <div class="candidate-row">
+        <span class="serial-no">5</span>
+        <div class="candidate-info">
+          <span class="candidate-name">NOTA</span>
+          <span class="party-symbol">🚫</span>
+        </div>
+        <div class="vote-btn-container">
+            <div class="led-lamp" id="led-5"></div>
+            <button class="vote-btn" onclick="castVote(5)"></button>
+        </div>
+      </div>
+
+      <!-- Share Section on Main Screen -->
+      <div class="share-section">
+        <div class="share-title">SHARE THIS POLLING STATION</div>
+        <div class="share-buttons-row">
+            <a class="share-btn whatsapp" href="#" id="share-wa" target="_blank">WhatsApp</a>
+            <a class="share-btn facebook" href="#" id="share-fb" target="_blank">Facebook</a>
+            <a class="share-btn telegram" href="#" id="share-tg" target="_blank">Telegram</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Thanks Screen (Hidden Initially) -->
+    <div id="thanks-container">
+        <img alt="Thanks for voting" class="thanks-img" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhdk2mwZcjLOr8gCSh71-6h5Ey6KwZwvS61UQWJ90J3Ao3RhhFOI7uYR92WNJGKyKU_MyV1BP-6RjYP7RLvxa6UYDyhQTqNAmtAtVmolEaBcs9Mn_CURYUi6wOsVpNsqqk53hxM0rE1wsJ4P4BQaHiXg0XJhjyYfZaSNOKJ1na4CMs-aZN0uPQJ0ubSp8E/s320/1000749440.jpg"/>
+        
+        <h2>മാതൃക വോട്ട് രേഖപ്പെടുത്തിയിരിക്കുന്നു. നന്ദി!</h2>
+
+        <div class="video-wrapper">
+             <!-- ഇവിടെ YOUR_YOUTUBE_VIDEO_ID എന്നതിന് പകരം വീഡിയോയുടെ ID നൽകുക -->
+             <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="true" frameborder="0" id="youtube-player" src="" title="YouTube video player">
+             </iframe>
         </div>
 
-        <!-- Candidate 1 -->
-        <div class="candidate-row">
-            <div class="candidate-info">
-                <span class="serial-number">1</span>
-                <div class="candidate-details">
-                    <span class="candidate-name">സ. മാലിക് മാങ്കോട്</span>
-                    <span class="party-symbol">🌾 (LDF)</span>
-                </div>
-            </div>
-            <div class="vote-btn-wrapper">
-                <button class="vote-button" onclick="castVote(this)">
-                    <span class="red-light"></span>
-                </button>
-            </div>
-        </div>
-
-        <!-- Candidate 2 (ഉദാഹരണം) -->
-        <div class="candidate-row">
-            <div class="candidate-info">
-                <span class="serial-number">2</span>
-                <div class="candidate-details">
-                    <span class="candidate-name">മറ്റൊരു സ്ഥാനാർത്ഥി</span>
-                    <span class="party-symbol">🖐 (UDF)</span>
-                </div>
-            </div>
-            <div class="vote-btn-wrapper">
-                <button class="vote-button" onclick="castVote(this)">
-                    <span class="red-light"></span>
-                </button>
-            </div>
-        </div>
-
-        <!-- NOTA -->
-        <div class="candidate-row">
-            <div class="candidate-info">
-                <span class="serial-number">3</span>
-                <div class="candidate-details">
-                    <span class="candidate-name">NOTA</span>
-                    <span class="party-symbol">❌</span>
-                </div>
-            </div>
-            <div class="vote-btn-wrapper">
-                <button class="vote-button" onclick="castVote(this)">
-                    <span class="red-light"></span>
-                </button>
-            </div>
-        </div>
-
-        <!-- Thank You Message -->
-        <div class="thank-you-msg" id="thankYouMsg">മാതൃക വോട്ട് രേഖപ്പെടുത്തിയിരിക്കുന്നു. നന്ദി!</div>
-
-        <!-- Result Section (Hidden initially) -->
-        <div class="result-section" id="resultSection">
-            <div class="video-container">
-                <!-- ഇവിടെ താങ്കളുടെ വീഡിയോയുടെ ലിങ്ക് നൽകുക -->
-                <video id="campaignVideo" controls playsinline>
-                    <source src="YOUR_VIDEO_URL_HERE.mp4" type="video/mp4">
-                    <!-- YouTube വീഡിയോ ആണെങ്കിൽ താഴെയുള്ള iframe ഉപയോഗിക്കാം -->
-                    <!-- <iframe width="100%" height="200" src="https://www.youtube.com/embed/VIDEO_ID?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> -->
-                    നിങ്ങളുടെ ബ്രൗസർ വീഡിയോ സപ്പോർട്ട് ചെയ്യുന്നില്ല.
-                </video>
-            </div>
-
-            <div class="share-container">
-                <div class="share-title">നിങ്ങളുടെ പിന്തുണ സുഹൃത്തുക്കളുമായി പങ്കുവെക്കൂ!</div>
-                <div class="share-buttons">
-                    <a href="https://api.whatsapp.com/send?text=ഞാൻ സ. മാലിക് മാങ്കോടിന് വോട്ട് ചെയ്തു! നിങ്ങളും LDF-നെ പിന്തുണക്കൂ. #VoteForLDF #MalikMankode" target="_blank" class="share-btn btn-whatsapp">
-                        WhatsApp
-                    </a>
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://your-website.com" target="_blank" class="share-btn btn-facebook">
-                        Facebook
-                    </a>
-                    <a href="https://t.me/share/url?url=https://your-website.com&text=ഞാൻ സ. മാലിക് മാങ്കോടിന് വോട്ട് ചെയ്തു! #VoteForLDF" target="_blank" class="share-btn btn-telegram">
-                        Telegram
-                    </a>
-                </div>
-            </div>
+        <button class="reset-btn" onclick="resetMachine()">Back to Voting</button>
+        
+        <div class="share-section" style="border-top:none; margin-top:10px;">
+             <div class="share-title">SHARE WITH FRIENDS</div>
+             <div class="share-buttons-row">
+                <a class="share-btn whatsapp" href="#" onclick="shareNow('wa')">WhatsApp</a>
+                <a class="share-btn facebook" href="#" onclick="shareNow('fb')">Facebook</a>
+                <a class="share-btn telegram" href="#" onclick="shareNow('tg')">Telegram</a>
+             </div>
         </div>
     </div>
 
-    <script>
-        let hasVoted = false;
+   <div class="footer-copyright">
+        © 2025 Created By <b>Binu Kallara</b> <br/>
+        <a href="https://wa.me/+6737250518" target="_blank">+6737250518</a>
+    </div>
+</div>
 
-        function castVote(buttonElement) {
-            if (hasVoted) return;
-            hasVoted = true;
+<script>
+    let hasVoted = false;
+    let audioCtx = null;
 
-            // 1. Disable all buttons and add visual feedback
-            const allButtons = document.querySelectorAll('.vote-button');
-            allButtons.forEach(btn => btn.disabled = true);
-
-            const redLight = buttonElement.querySelector('.red-light');
-            redLight.classList.add('active');
-            buttonElement.style.transform = 'scale(0.95)';
-
-            // 2. Show thank you message
-            document.getElementById('thankYouMsg').classList.add('show');
-
-            // 3. Simulate processing delay
-            setTimeout(() => {
-                const machine = document.getElementById('votingMachine');
-                machine.classList.add('fade-out');
-
-                setTimeout(() => {
-                    // 4. Hide the machine and show result section
-                    machine.style.display = 'none';
-                    
-                    const resultSection = document.getElementById('resultSection');
-                    resultSection.style.display = 'block';
-                    
-                    // Trigger reflow for animation
-                    void resultSection.offsetWidth; 
-                    resultSection.classList.add('show');
-
-                    // 5. Auto-play video (muted to bypass browser restrictions)
-                    const video = document.getElementById('campaignVideo');
-                    if (video) {
-                        video.muted = true;
-                        video.play().catch(error => {
-                            console.log("Autoplay was prevented. User needs to click play.", error);
-                        });
-                    }
-
-                }, 500); // Wait for fade-out
-
-            }, 1000); // Processing delay
+    // ശബ്ദം ഉണ്ടാക്കാൻ വേണ്ടിയുള്ള ഫംഗ്ഷൻ
+    function playSound(type) {
+        if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         }
-    </script>
+        if (audioCtx.state === 'suspended') { audioCtx.resume(); }
+
+        const oscillator = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+
+        oscillator.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+        
+        if (type === 'error') {
+           oscillator.type = 'sawtooth';
+           oscillator.frequency.setValueAtTime(150, audioCtx.currentTime);
+           gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+           oscillator.start();
+           oscillator.stop(audioCtx.currentTime + 0.3);
+        } else {
+           oscillator.type = 'square';
+           oscillator.frequency.setValueAtTime(3000, audioCtx.currentTime);
+           gainNode.gain.setValueAtTime(0.05, audioCtx.currentTime);
+           oscillator.start();
+           oscillator.stop(audioCtx.currentTime + 2); 
+        }
+    }
+
+    // വോട്ട് ചെയ്യാനുള്ള ഫംഗ്ഷൻ
+    function castVote(id) {
+        const display = document.getElementById('status-display');
+
+        if (hasVoted) {
+          display.innerHTML = "ALREADY VOTED!<br>വോട്ട് ചെയ്തു കഴിഞ്ഞു";
+          display.classList.add('error-msg');
+          playSound('error');
+          return;
+        }
+
+        hasVoted = true;
+        playSound('success');
+
+        const led = document.getElementById('led-' + id);
+        led.classList.add('led-on');
+
+        display.innerHTML = "VOTE RECORDING...";
+
+        // 2 സെക്കൻഡിന് ശേഷം സ്ക്രീൻ മാറുന്നു, യൂട്യൂബ് വീഡിയോ പ്ലേ ആകുന്നു
+        setTimeout(() => {
+            document.getElementById('evm-main-interface').style.display = 'none';
+            document.getElementById('thanks-container').style.display = 'block';
+            
+            // ഇവിടെയാണ് യൂട്യൂബ് ലിങ്ക് കൊടുക്കുന്നത് (YOUR_YOUTUBE_VIDEO_ID മാറ്റുക)
+            const videoId = "fi7ANhu1b7U"; // ഉദാഹരണം: fi7ANhu1b7U
+            document.getElementById('youtube-player').src = "https://www.youtube.com/embed/" + videoId + "?autoplay=1&rel=0&start=0";
+            
+        }, 2000);
+    }
+
+    // വീണ്ടും വോട്ട് ചെയ്യാൻ വേണ്ടി റീസെറ്റ് ചെയ്യുന്ന ഫംഗ്ഷൻ
+    function resetMachine() {
+        hasVoted = false;
+        const leds = document.querySelectorAll('.led-lamp');
+        leds.forEach(led => led.classList.remove('led-on'));
+        
+        const display = document.getElementById('status-display');
+        display.innerHTML = "READY TO VOTE";
+        display.classList.remove('error-msg');
+
+        // വീഡിയോ സ്റ്റോപ്പ് ചെയ്യാൻ SRC ക്ലിയർ ചെയ്യുന്നു
+        document.getElementById('youtube-player').src = "";
+
+        document.getElementById('evm-main-interface').style.display = 'block';
+        document.getElementById('thanks-container').style.display = 'none';
+    }
+
+    // --- Sharing Logic ---
+    window.onload = function() {
+        const pageUrl = encodeURIComponent(window.location.href);
+        const pageTitle = encodeURIComponent("Check out this Sample Voting Machine!");
+
+        document.getElementById('share-wa').href = "https://api.whatsapp.com/send?text=" + pageTitle + " " + pageUrl;
+        document.getElementById('share-fb').href = "https://www.facebook.com/sharer/sharer.php?u=" + pageUrl;
+        document.getElementById('share-tg').href = "https://t.me/share/url?url=" + pageUrl + "&text=" + pageTitle;
+    };
+
+    function shareNow(platform) {
+        const pageUrl = encodeURIComponent(window.location.href);
+        let url = "";
+        if(platform === 'wa') url = "https://api.whatsapp.com/send?text=" + pageUrl;
+        if(platform === 'fb') url = "https://www.facebook.com/sharer/sharer.php?u=" + pageUrl;
+        if(platform === 'tg') url = "https://t.me/share/url?url=" + pageUrl;
+        window.open(url, '_blank');
+    }
+</script>
 
 </body>
 </html>
