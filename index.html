@@ -95,15 +95,15 @@
             border-color: #dc2626 !important;
         }
 
-        /* Yellow Ballot Paper Unit (Zilla Panchayat) */
+        /* Yellow Ballot Paper Unit */
         .ballot-unit {
-            background-color: #fef08a; /* Official Yellow Ballot Paper Theme */
+            background-color: #fef08a;
             border: 2px solid #eab308;
             border-radius: 8px;
             padding: 6px;
         }
 
-        /* Candidate Row - Compact styling for 16 rows */
+        /* Candidate Row */
         .candidate-row {
             display: flex;
             align-items: center;
@@ -140,13 +140,25 @@
             min-width: 0;
         }
 
-        /* Candidate Name */
         .candidate-name {
             font-size: 15px;
             font-weight: 800;
             color: #0f172a;
             line-height: 1.2;
             word-break: break-word;
+        }
+
+        /* Vote Count Badge Styling */
+        .vote-count-badge {
+            background-color: #0f172a;
+            color: #38bdf8;
+            font-size: 11px;
+            font-weight: bold;
+            padding: 2px 7px;
+            border-radius: 12px;
+            border: 1px solid #0284c7;
+            white-space: nowrap;
+            margin-right: 4px;
         }
 
         .party-symbol-container {
@@ -252,7 +264,6 @@
             border: 1px solid #86efac;
         }
 
-        /* Native HTML5 Video & End Image Wrapper */
         .video-wrapper {
             margin: 12px 0;
             width: 100%;
@@ -360,13 +371,15 @@
       
         <div class="digital-screen" id="status-display">READY TO VOTE</div>
 
-        <!-- Ballot Unit Paper (16 Standard EVM Slots) -->
+        <!-- Ballot Unit Paper -->
         <div class="ballot-unit">
 
-            <!-- Candidate 1 (EMPTY) -->
+            <!-- Candidate 1 -->
             <div class="candidate-row">
                 <span class="serial-no">1</span>
-                <div class="candidate-info"></div>
+                <div class="candidate-info">
+                    <span class="vote-count-badge" id="count-1">0 വോട്ട്</span>
+                </div>
                 <div class="vote-btn-container">
                     <div class="led-lamp" id="led-1"></div>
                     <button class="vote-btn" onclick="castVote(1)"></button>
@@ -378,6 +391,7 @@
                 <span class="serial-no" style="color: #dc2626; border-right-color: #fca5a5;">2</span>
                 <div class="candidate-info">
                     <span class="candidate-name">മാലിക് മാങ്കോട്</span>
+                    <span class="vote-count-badge" id="count-2">0 വോട്ട്</span>
                     <div class="party-symbol-container">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/CPI_symbol.svg" alt="CPI Symbol">
                     </div>
@@ -388,130 +402,156 @@
                 </div>
             </div>
 
-            <!-- Candidate 3 (EMPTY) -->
+            <!-- Candidate 3 -->
             <div class="candidate-row">
                 <span class="serial-no">3</span>
-                <div class="candidate-info"></div>
+                <div class="candidate-info">
+                    <span class="vote-count-badge" id="count-3">0 വോട്ട്</span>
+                </div>
                 <div class="vote-btn-container">
                     <div class="led-lamp" id="led-3"></div>
                     <button class="vote-btn" onclick="castVote(3)"></button>
                 </div>
             </div>
 
-            <!-- Candidate 4 (EMPTY) -->
+            <!-- Candidate 4 -->
             <div class="candidate-row">
                 <span class="serial-no">4</span>
-                <div class="candidate-info"></div>
+                <div class="candidate-info">
+                    <span class="vote-count-badge" id="count-4">0 വോട്ട്</span>
+                </div>
                 <div class="vote-btn-container">
                     <div class="led-lamp" id="led-4"></div>
                     <button class="vote-btn" onclick="castVote(4)"></button>
                 </div>
             </div>
 
-            <!-- Candidate 5 (EMPTY) -->
+            <!-- Candidate 5 -->
             <div class="candidate-row">
                 <span class="serial-no">5</span>
-                <div class="candidate-info"></div>
+                <div class="candidate-info">
+                    <span class="vote-count-badge" id="count-5">0 വോട്ട്</span>
+                </div>
                 <div class="vote-btn-container">
                     <div class="led-lamp" id="led-5"></div>
                     <button class="vote-btn" onclick="castVote(5)"></button>
                 </div>
             </div>
 
-            <!-- Candidate 6 (EMPTY) -->
+            <!-- Candidate 6 -->
             <div class="candidate-row">
                 <span class="serial-no">6</span>
-                <div class="candidate-info"></div>
+                <div class="candidate-info">
+                    <span class="vote-count-badge" id="count-6">0 വോട്ട്</span>
+                </div>
                 <div class="vote-btn-container">
                     <div class="led-lamp" id="led-6"></div>
                     <button class="vote-btn" onclick="castVote(6)"></button>
                 </div>
             </div>
 
-            <!-- Candidate 7 (EMPTY) -->
+            <!-- Candidate 7 -->
             <div class="candidate-row">
                 <span class="serial-no">7</span>
-                <div class="candidate-info"></div>
+                <div class="candidate-info">
+                    <span class="vote-count-badge" id="count-7">0 വോട്ട്</span>
+                </div>
                 <div class="vote-btn-container">
                     <div class="led-lamp" id="led-7"></div>
                     <button class="vote-btn" onclick="castVote(7)"></button>
                 </div>
             </div>
 
-            <!-- Candidate 8 (EMPTY) -->
+            <!-- Candidate 8 -->
             <div class="candidate-row">
                 <span class="serial-no">8</span>
-                <div class="candidate-info"></div>
+                <div class="candidate-info">
+                    <span class="vote-count-badge" id="count-8">0 വോട്ട്</span>
+                </div>
                 <div class="vote-btn-container">
                     <div class="led-lamp" id="led-8"></div>
                     <button class="vote-btn" onclick="castVote(8)"></button>
                 </div>
             </div>
 
-            <!-- Candidate 9 (EMPTY) -->
+            <!-- Candidate 9 -->
             <div class="candidate-row">
                 <span class="serial-no">9</span>
-                <div class="candidate-info"></div>
+                <div class="candidate-info">
+                    <span class="vote-count-badge" id="count-9">0 വോട്ട്</span>
+                </div>
                 <div class="vote-btn-container">
                     <div class="led-lamp" id="led-9"></div>
                     <button class="vote-btn" onclick="castVote(9)"></button>
                 </div>
             </div>
 
-            <!-- Candidate 10 (EMPTY) -->
+            <!-- Candidate 10 -->
             <div class="candidate-row">
                 <span class="serial-no">10</span>
-                <div class="candidate-info"></div>
+                <div class="candidate-info">
+                    <span class="vote-count-badge" id="count-10">0 വോട്ട്</span>
+                </div>
                 <div class="vote-btn-container">
                     <div class="led-lamp" id="led-10"></div>
                     <button class="vote-btn" onclick="castVote(10)"></button>
                 </div>
             </div>
 
-            <!-- Candidate 11 (EMPTY) -->
+            <!-- Candidate 11 -->
             <div class="candidate-row">
                 <span class="serial-no">11</span>
-                <div class="candidate-info"></div>
+                <div class="candidate-info">
+                    <span class="vote-count-badge" id="count-11">0 വോട്ട്</span>
+                </div>
                 <div class="vote-btn-container">
                     <div class="led-lamp" id="led-11"></div>
                     <button class="vote-btn" onclick="castVote(11)"></button>
                 </div>
             </div>
 
-            <!-- Candidate 12 (EMPTY) -->
+            <!-- Candidate 12 -->
             <div class="candidate-row">
                 <span class="serial-no">12</span>
-                <div class="candidate-info"></div>
+                <div class="candidate-info">
+                    <span class="vote-count-badge" id="count-12">0 വോട്ട്</span>
+                </div>
                 <div class="vote-btn-container">
                     <div class="led-lamp" id="led-12"></div>
                     <button class="vote-btn" onclick="castVote(12)"></button>
                 </div>
             </div>
 
-            <!-- Candidate 13 (EMPTY) -->
+            <!-- Candidate 13 -->
             <div class="candidate-row">
                 <span class="serial-no">13</span>
-                <div class="candidate-info"></div>
+                <div class="candidate-info">
+                    <span class="vote-count-badge" id="count-13">0 വോട്ട്</span>
+                </div>
                 <div class="vote-btn-container">
                     <div class="led-lamp" id="led-13"></div>
                     <button class="vote-btn" onclick="castVote(13)"></button>
                 </div>
             </div>
 
-            <!-- Candidate 14 (EMPTY) -->
+            <!-- Candidate 14 -->
             <div class="candidate-row">
                 <span class="serial-no">14</span>
-                <div class="candidate-info"></div>
+                <div class="candidate-info">
+                    <span class="vote-count-badge" id="count-14">0 വോട്ട്</span>
+                </div>
                 <div class="vote-btn-container">
                     <div class="led-lamp" id="led-14"></div>
                     <button class="vote-btn" onclick="castVote(14)"></button>
                 </div>
             </div>
 
-            <!-- Candidate 15 (EMPTY) -->
+            <!-- Candidate 15 -->
             <div class="candidate-row">
                 <span class="serial-no">15</span>
-                <div class="candidate-info"></div>
+                <div class="candidate-info">
+                    <span class="vote-count-badge" id="count-15">0 വോട്ട്</span>
+                </div>
                 <div class="vote-btn-container">
                     <div class="led-lamp" id="led-15"></div>
                     <button class="vote-btn" onclick="castVote(15)"></button>
@@ -523,6 +563,7 @@
                 <span class="serial-no">16</span>
                 <div class="candidate-info">
                     <span class="candidate-name">നോട്ട (NOTA)</span>
+                    <span class="vote-count-badge" id="count-16">0 വോട്ട്</span>
                     <div class="party-symbol-container">
                         <span class="nota-box">NOTA</span>
                     </div>
@@ -579,9 +620,41 @@
 
 </div>
 
+<!-- Firebase Standard Web SDK (v8) -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
 <script>
+    // Your exact Firebase Project Credentials
+    const firebaseConfig = {
+      apiKey: "AIzaSyDnDaK54LhQNj6goCHTGg_lHws4RR8UdR4",
+      authDomain: "vote4malik-2f0f1.firebaseapp.com",
+      databaseURL: "https://vote4malik-2f0f1-default-rtdb.firebaseio.com",
+      projectId: "vote4malik-2f0f1",
+      storageBucket: "vote4malik-2f0f1.firebasestorage.app",
+      messagingSenderId: "504831875259",
+      appId: "1:504831875259:web:0e6bdeec6d30cd5dbcf19e",
+      measurementId: "G-Y94KK2K4Q0"
+    };
+
+    // Initialize Firebase Database
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+
     let hasVoted = false;
     let audioCtx = null;
+
+    // Realtime Database-ൽ നിന്ന് തത്സമയ വോട്ടുകൾ ട്രാക്ക് ചെയ്തു എണ്ണം കാണിക്കാൻ
+    database.ref('votes').on('value', (snapshot) => {
+        const liveData = snapshot.val() || {};
+        for (let i = 1; i <= 16; i++) {
+            const countElem = document.getElementById('count-' + i);
+            if (countElem) {
+                const count = liveData['candidate_' + i] || 0;
+                countElem.innerText = count + " വോട്ട്";
+            }
+        }
+    });
 
     // EVM Beep Sound Function
     function playSound(type) {
@@ -611,7 +684,7 @@
         }
     }
 
-    // Vote Cast Function
+    // Cast Vote Function
     function castVote(id) {
         const display = document.getElementById('status-display');
 
@@ -625,6 +698,12 @@
         hasVoted = true;
         playSound('success');
 
+        // Increment count live in Firebase Realtime Database
+        const candidateRef = database.ref('votes/candidate_' + id);
+        candidateRef.transaction((currentVotes) => {
+            return (currentVotes || 0) + 1;
+        });
+
         const led = document.getElementById('led-' + id);
         if(led) led.classList.add('led-on');
 
@@ -637,20 +716,16 @@
             const videoPlayer = document.getElementById('mp4-player');
             const endBanner = document.getElementById('end-banner-img');
 
-            // Reset initial visibility state
             videoPlayer.style.display = 'block';
             endBanner.style.display = 'none';
             
-            // Raw GitHub MP4 Video Stream Link
             videoPlayer.src = "https://raw.githubusercontent.com/binukallara/Vote4ldf/main/പുതിയ%20ചിന്തകൾ%20ഉറച്ച%20ചുവടുകൾ%20❤%EF%B8%8F.mp4";
             
-            // Video Ended Event Listener -> Show Poster Image
             videoPlayer.onended = function() {
                 videoPlayer.style.display = 'none';
                 endBanner.style.display = 'block';
             };
 
-            // Unmute & Play
             videoPlayer.muted = false;
             videoPlayer.play().catch(() => {
                 videoPlayer.muted = true;
