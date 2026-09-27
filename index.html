@@ -134,10 +134,10 @@
             justify-content: space-between;
             align-items: center;
             overflow: hidden;
-            min-width: 0; /* Flexbox text overflow fix */
+            min-width: 0;
         }
 
-        /* Fully Visible Name with Responsive Auto-wrap */
+        /* Candidate Name */
         .candidate-name {
             font-size: 15px;
             font-weight: 800;
@@ -152,13 +152,19 @@
         }
 
         .party-symbol-container {
-            width: 36px;
-            height: 36px;
+            width: 38px;
+            height: 38px;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
             margin-left: 4px;
+        }
+
+        .party-symbol-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
         }
 
         .nota-box {
@@ -366,17 +372,14 @@
                 </div>
             </div>
 
-            <!-- Candidate 2: Malik Mankode (NO TRUNCATION, CLEAR & FULL) -->
+            <!-- Candidate 2: Malik Mankode (Updated Symbol) -->
             <div class="candidate-row" style="border: 2px solid #dc2626; background: #fff5f5;">
                 <span class="serial-no" style="color: #dc2626;">2</span>
                 <div class="candidate-info">
                     <span class="candidate-name main-candidate">സ. മാലിക് മാങ്കോട്</span>
                     <div class="party-symbol-container">
-                        <!-- LDF Paddy & Sickle Symbol -->
-                        <svg viewBox="0 0 100 100" style="width:34px; height:34px; fill:#dc2626;">
-                            <path d="M50 10 C30 30 20 60 30 85 C40 85 70 80 85 50 C70 40 50 10 50 10Z" />
-                            <circle cx="45" cy="55" r="22" fill="none" stroke="#dc2626" stroke-width="8"/>
-                        </svg>
+                        <!-- Updated CPI SVG Symbol -->
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/CPI_symbol.svg" alt="CPI Symbol">
                     </div>
                 </div>
                 <div class="vote-btn-container">
