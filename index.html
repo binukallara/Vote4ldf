@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kallara Panchayat Election - Sample Voting Machine</title>
+    <title>തിരുവനന്തപുരം ജില്ലാ പഞ്ചായത്ത് - കല്ലറ ഡിവിഷൻ മാതൃകാ വോട്ടിങ് മെഷീൻ</title>
     <style>
-        /* Basic Setup */
+        /* Base Setup */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -14,7 +14,8 @@
         }
 
         body {
-            background-color: #eef2f7;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: #333;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -22,21 +23,20 @@
             min-height: 100vh;
         }
 
-        /* EVM Container */
         #evm-app {
             width: 100%;
-            max-width: 600px;
+            max-width: 580px;
             margin: 0 auto;
         }
 
+        /* EVM Container */
         #evm-main-interface {
-            border: 6px solid #333;
-            background-color: #f0f0f0;
-            padding: 15px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            display: block;
-            animation: fadeIn 0.5s ease-in-out;
+            border: 5px solid #1e293b;
+            background-color: #e2e8f0;
+            padding: 16px;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            animation: fadeIn 0.4s ease-in-out;
         }
 
         @keyframes fadeIn {
@@ -44,119 +44,92 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Thanks Screen & Video */
-        #thanks-container {
-            display: none;
+        /* Zilla Panchayat Yellow Theme Banner */
+        .zp-header-banner {
+            background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+            color: #ffffff;
             text-align: center;
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            width: 100%;
-            max-width: 600px;
-            animation: fadeIn 0.5s ease-in-out;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+            border: 2px solid #78350f;
         }
 
-        #thanks-container img.thanks-img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            border: 2px solid #0059b3;
-            max-height: 300px;
-            object-fit: cover;
-        }
-
-        #thanks-container h2 {
-            color: #0059b3;
-            margin-top: 15px;
-            margin-bottom: 15px;
-            font-size: 1.2em;
-        }
-
-        /* Video Player Styling (YouTube) */
-        .video-wrapper {
-            margin-top: 15px;
-            margin-bottom: 15px;
-            width: 100%;
-            height: 0;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-            position: relative;
-            border-radius: 8px;
-            overflow: hidden;
-            border: 3px solid #333;
-            background: #000;
-        }
-        
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
-        /* Header & Screen */
-        .evm-header {
-            text-align: center;
-            background-color: #2c3e50;
-            color: white;
-            padding: 10px;
-            border-radius: 4px;
-            font-weight: bold;
-            font-size: 1em;
-            margin-bottom: 10px;
+        .zp-header-banner h1 {
+            font-size: 16px;
+            font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
 
+        .zp-header-banner h2 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 3px;
+            color: #fef3c7;
+        }
+
+        /* Digital Display Screen */
         .digital-screen {
-            background-color: #222;
-            color: #39ff14;
+            background-color: #000000;
+            color: #00ff66;
             font-family: 'Courier New', Courier, monospace;
             font-size: 16px;
             font-weight: bold;
             text-align: center;
             padding: 12px;
             margin-bottom: 15px;
-            border: 4px solid #555;
-            border-radius: 4px;
+            border: 3px solid #475569;
+            border-radius: 8px;
             text-transform: uppercase;
-            box-shadow: inset 0 0 10px rgba(57, 255, 20, 0.3);
+            box-shadow: inset 0 0 10px rgba(0, 255, 102, 0.3);
             transition: all 0.3s ease;
         }
 
         .error-msg {
             color: #ff3333 !important;
-            text-shadow: 0 0 5px rgba(255, 51, 51, 0.5);
-            border-color: #ff3333 !important;
-            box-shadow: inset 0 0 10px rgba(255, 51, 51, 0.3) !important;
+            box-shadow: inset 0 0 10px rgba(255, 51, 51, 0.4) !important;
+            border-color: #dc2626 !important;
         }
 
-        /* Candidates Row */
+        /* Ballot Unit Container (Yellow Ballot Paper for Zilla Panchayat) */
+        .ballot-unit {
+            background-color: #fef08a; /* Official Yellow Ballot Paper Theme */
+            border: 2px solid #ca8a04;
+            border-radius: 10px;
+            padding: 8px;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+        }
+
+        /* Candidate Row */
         .candidate-row {
             display: flex;
             align-items: center;
-            background: linear-gradient(to bottom, #ffffff, #f2f2f2);
-            border: 1px solid #999;
+            background: #ffffff;
+            border: 1px solid #d97706;
             margin-bottom: 8px;
-            padding: 5px 10px;
-            height: 60px;
-            border-radius: 6px;
-            transition: all 0.3s ease;
+            padding: 6px 12px;
+            height: 65px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .candidate-row:last-child {
+            margin-bottom: 0;
         }
 
         .candidate-row:hover {
-            background: #fff;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
         }
 
         .serial-no {
-            width: 30px;
+            width: 32px;
             font-weight: 800;
-            font-size: 18px;
-            color: #333;
-            border-right: 2px solid #555;
+            font-size: 20px;
+            color: #1e293b;
+            border-right: 2px solid #ca8a04;
             padding-right: 8px;
             text-align: center;
         }
@@ -172,104 +145,162 @@
 
         .candidate-name {
             font-size: 16px;
-            font-weight: bold;
-            color: #222;
+            font-weight: 700;
+            color: #0f172a;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            max-width: 180px;
         }
 
-        .party-symbol {
+        .party-symbol-container {
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 8px;
+            flex-shrink: 0;
             font-size: 24px;
-            margin-right: 5px;
-            flex-shrink: 0;
-        }
-        
-        .party-symbol-img {
-            width: 30px;
-            height: auto;
-            margin-right: 5px;
-            flex-shrink: 0;
         }
 
-        /* Buttons & LED */
+        .party-symbol-img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        /* LED and Button Container */
         .vote-btn-container {
             display: flex;
             align-items: center;
             margin-left: auto;
             flex-shrink: 0;
+            background: #f1f5f9;
+            padding: 4px 8px;
+            border-radius: 6px;
+            border: 1px solid #cbd5e1;
         }
 
         .led-lamp {
-            width: 15px;
-            height: 15px;
-            background-color: #300;
+            width: 16px;
+            height: 16px;
+            background-color: #450a0a;
             border-radius: 50%;
             margin-right: 12px;
-            border: 2px solid #222;
+            border: 2px solid #1e293b;
             transition: all 0.2s ease;
         }
 
         .led-on {
-            background-color: #ff0000;
-            box-shadow: 0 0 10px #ff0000;
-            border-color: #cc0000;
+            background-color: #ef4444;
+            box-shadow: 0 0 12px #ef4444;
+            border-color: #991b1b;
         }
 
         .vote-btn {
-            width: 50px;
-            height: 30px;
-            background: linear-gradient(to bottom, #0066cc 0%, #003366 100%);
+            width: 55px;
+            height: 34px;
+            background: linear-gradient(180deg, #2563eb 0%, #1d4ed8 100%);
             border-radius: 6px;
-            border: 2px solid #002244;
+            border: 2px solid #1e40af;
             cursor: pointer;
-            box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+            box-shadow: 0 3px 0 #1e3a8a, 0 4px 6px rgba(0,0,0,0.2);
             transition: all 0.1s ease;
         }
 
         .vote-btn:active {
-            transform: scale(0.95);
-            background: linear-gradient(to bottom, #003366 0%, #002244 100%);
+            transform: translateY(2px);
+            box-shadow: 0 1px 0 #1e3a8a, 0 2px 3px rgba(0,0,0,0.2);
         }
 
-        .vote-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
+        /* Thanks Screen */
+        #thanks-container {
+            display: none;
+            text-align: center;
+            background: #ffffff;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            width: 100%;
+            max-width: 580px;
+            animation: fadeIn 0.5s ease-in-out;
+            border: 4px solid #f59e0b;
+        }
+
+        #thanks-container h2 {
+            color: #1e293b;
+            margin-bottom: 8px;
+            font-size: 1.25em;
+            font-weight: 800;
+        }
+
+        .thanks-badge {
+            background-color: #dcfce7;
+            color: #166534;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+            font-size: 14px;
+            border: 1px solid #86efac;
+        }
+
+        .video-wrapper {
+            margin: 15px 0;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%;
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 3px solid #1e293b;
+            background: #000;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+        
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: 0;
         }
 
         .reset-btn {
-            display: block;
-            margin: 20px auto 0;
-            padding: 10px 25px;
-            background-color: #555;
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 24px;
+            background: linear-gradient(135deg, #475569 0%, #334155 100%);
             color: white;
             border: none;
             cursor: pointer;
             border-radius: 30px;
             font-size: 14px;
             font-weight: bold;
-            transition: background 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            transition: all 0.2s;
         }
 
         .reset-btn:hover {
-            background-color: #333;
+            background: #1e293b;
+            transform: translateY(-1px);
         }
 
-        /* Share Buttons Styling */
+        /* Share Section */
         .share-section {
-            margin-top: 25px;
-            border-top: 2px dashed #999;
+            margin-top: 20px;
+            border-top: 2px dashed #cbd5e1;
             padding-top: 15px;
             text-align: center;
         }
         
         .share-title {
-            font-size: 14px;
-            color: #555;
+            font-size: 13px;
+            color: #64748b;
             margin-bottom: 10px;
             font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .share-buttons-row {
@@ -281,40 +312,41 @@
 
         .share-btn {
             text-decoration: none;
-            padding: 8px 15px;
+            padding: 8px 16px;
             color: white;
-            border-radius: 5px;
+            border-radius: 8px;
             font-size: 13px;
             font-weight: bold;
-            display: inline-block;
-            transition: opacity 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: transform 0.2s, opacity 0.2s;
             border: none;
             cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
         }
         
-        .share-btn:hover { opacity: 0.8; }
-        
+        .share-btn:hover { opacity: 0.9; transform: translateY(-1px); }
         .whatsapp { background-color: #25D366; }
         .facebook { background-color: #1877F2; }
         .telegram { background-color: #0088cc; }
 
-        /* Footer */
         .footer-copyright {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 25px;
             font-size: 12px;
-            color: #777;
+            color: #94a3b8;
         }
 
         .footer-copyright a {
-            color: #0059b3;
+            color: #38bdf8;
             text-decoration: none;
+            font-weight: bold;
         }
 
-        @media (max-width: 360px) {
-            .candidate-name { font-size: 14px; max-width: 110px; }
-            .party-symbol { font-size: 20px; }
-            .vote-btn { width: 40px; }
+        @media (max-width: 420px) {
+            .candidate-name { font-size: 14px; }
+            .vote-btn { width: 45px; }
         }
     </style>
 </head>
@@ -324,105 +356,117 @@
     
     <!-- Main EVM Interface -->
     <div id="evm-main-interface">
-      <div class="evm-header">KALLARA PANCHAYAT ELECTION DEMO VOTE</div>
-      <div class="evm-header">വാർഡ് - 4, തുപ്പസഗിരി</div>
+        <div class="zp-header-banner">
+            <h1>തിരുവനന്തപുരം ജില്ലാ പഞ്ചായത്ത് തെരഞ്ഞെടുപ്പ്</h1>
+            <h2>കല്ലറ ഡിവിഷൻ - മാതൃകാ വോട്ടിങ് മെഷീൻ</h2>
+        </div>
       
-      <div class="digital-screen" id="status-display">READY TO VOTE</div>
+        <div class="digital-screen" id="status-display">READY TO VOTE</div>
 
-      <!-- Candidate 1 -->
-      <div class="candidate-row">
-        <span class="serial-no">1</span>
-        <div class="candidate-info">
-          <span class="candidate-name">സ്ഥാനാർത്ഥി 1</span>
-          <span class="party-symbol">🌾</span>
-        </div>
-        <div class="vote-btn-container">
-            <div class="led-lamp" id="led-1"></div>
-            <button class="vote-btn" onclick="castVote(1)"></button>
-        </div>
-      </div>
+        <!-- Ballot Unit Paper (Yellow Theme) -->
+        <div class="ballot-unit">
 
-      <!-- Candidate 2 -->
-      <div class="candidate-row">
-        <span class="serial-no">2</span>
-        <div class="candidate-info">
-          <span class="candidate-name">സ്ഥാനാർത്ഥി 2</span>
-          <span class="party-symbol">🖐</span>
-        </div>
-        <div class="vote-btn-container">
-            <div class="led-lamp" id="led-2"></div>
-            <button class="vote-btn" onclick="castVote(2)"></button>
-        </div>
-      </div>
+            <!-- Candidate 1 -->
+            <div class="candidate-row">
+                <span class="serial-no">1</span>
+                <div class="candidate-info">
+                    <span class="candidate-name">സ്ഥാനാർത്ഥി 1</span>
+                    <div class="party-symbol-container">✋</div>
+                </div>
+                <div class="vote-btn-container">
+                    <div class="led-lamp" id="led-1"></div>
+                    <button class="vote-btn" onclick="castVote(1)"></button>
+                </div>
+            </div>
 
-      <!-- Candidate 3 -->
-      <div class="candidate-row">
-        <span class="serial-no">3</span>
-        <div class="candidate-info">
-          <span class="candidate-name">സ്ഥാനാർത്ഥി 3</span>
-          <span class="party-symbol">⭐</span>
-        </div>
-        <div class="vote-btn-container">
-            <div class="led-lamp" id="led-3"></div>
-            <button class="vote-btn" onclick="castVote(3)"></button>
-        </div>
-      </div>
-      
-      <!-- Candidate 4 (With Image Symbol) -->
-      <div class="candidate-row">
-        <span class="serial-no">4</span>
-        <div class="candidate-info">
-          <span class="candidate-name">ഒ.കെ. സഹീദ</span>
-          <!-- താങ്കളുടെ ചിത്രത്തിന്റെ ലിങ്ക് ഇവിടെ നൽകുക -->
-          <img alt="Symbol" class="party-symbol-img" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhX06fPMcTWhc3UnrEVw8vUDUJ-ReLJ1ChBhihqDsM4CMrp3hNX-Y5YWkF5LGpd2tD6yrasNpSOJkB8XF_qHvL-dn0M6JKERn6nGMiV4aNL7e-VFbTJeeWuQYBDkoRRiD-UI-p1MluwEceqvfseJDaFZ2ppzoujjkj2RpyCkGSmXfNcK3rVaa1Yvhg7jAQ/s320/1000749404.png"/>
-        </div>
-        <div class="vote-btn-container">
-            <div class="led-lamp" id="led-4"></div>
-            <button class="vote-btn" onclick="castVote(4)"></button>
-        </div>
-      </div>
+            <!-- Candidate 2: Malik Mankode -->
+            <div class="candidate-row" style="border: 2px solid #dc2626; background: #fff5f5;">
+                <span class="serial-no" style="color: #dc2626;">2</span>
+                <div class="candidate-info">
+                    <span class="candidate-name" style="color: #dc2626;">സ. മാലിക് മാങ്കോട്</span>
+                    <div class="party-symbol-container">
+                        <!-- LDF Sickle, Paddy & Hammer Symbol (SVG) -->
+                        <svg viewBox="0 0 100 100" style="width:36px; height:36px; fill:#dc2626;">
+                            <path d="M50 10 C30 30 20 60 30 85 C40 85 70 80 85 50 C70 40 50 10 50 10Z" />
+                            <circle cx="45" cy="55" r="22" fill="none" stroke="#dc2626" stroke-width="8"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="vote-btn-container">
+                    <div class="led-lamp" id="led-2"></div>
+                    <button class="vote-btn" onclick="castVote(2)"></button>
+                </div>
+            </div>
 
-      <!-- NOTA -->
-      <div class="candidate-row">
-        <span class="serial-no">5</span>
-        <div class="candidate-info">
-          <span class="candidate-name">NOTA</span>
-          <span class="party-symbol">🚫</span>
-        </div>
-        <div class="vote-btn-container">
-            <div class="led-lamp" id="led-5"></div>
-            <button class="vote-btn" onclick="castVote(5)"></button>
-        </div>
-      </div>
+            <!-- Candidate 3 -->
+            <div class="candidate-row">
+                <span class="serial-no">3</span>
+                <div class="candidate-info">
+                    <span class="candidate-name">സ്ഥാനാർത്ഥി 3</span>
+                    <div class="party-symbol-container">🪷</div>
+                </div>
+                <div class="vote-btn-container">
+                    <div class="led-lamp" id="led-3"></div>
+                    <button class="vote-btn" onclick="castVote(3)"></button>
+                </div>
+            </div>
 
-      <!-- Share Section on Main Screen -->
-      <div class="share-section">
-        <div class="share-title">SHARE THIS POLLING STATION</div>
-        <div class="share-buttons-row">
-            <a class="share-btn whatsapp" href="#" id="share-wa" target="_blank">WhatsApp</a>
-            <a class="share-btn facebook" href="#" id="share-fb" target="_blank">Facebook</a>
-            <a class="share-btn telegram" href="#" id="share-tg" target="_blank">Telegram</a>
+            <!-- Candidate 4 -->
+            <div class="candidate-row">
+                <span class="serial-no">4</span>
+                <div class="candidate-info">
+                    <span class="candidate-name">സ്ഥാനാർത്ഥി 4</span>
+                    <div class="party-symbol-container">⭐</div>
+                </div>
+                <div class="vote-btn-container">
+                    <div class="led-lamp" id="led-4"></div>
+                    <button class="vote-btn" onclick="castVote(4)"></button>
+                </div>
+            </div>
+
+            <!-- NOTA -->
+            <div class="candidate-row">
+                <span class="serial-no">5</span>
+                <div class="candidate-info">
+                    <span class="candidate-name">നോട്ട (NOTA)</span>
+                    <div class="party-symbol-container">🚫</div>
+                </div>
+                <div class="vote-btn-container">
+                    <div class="led-lamp" id="led-5"></div>
+                    <button class="vote-btn" onclick="castVote(5)"></button>
+                </div>
+            </div>
+
         </div>
-      </div>
+
+        <!-- Share Section on Main EVM -->
+        <div class="share-section">
+            <div class="share-title">ഈ മാതൃകാ വോട്ടിങ് മെഷീൻ പങ്കുവെക്കൂ:</div>
+            <div class="share-buttons-row">
+                <a class="share-btn whatsapp" href="#" id="share-wa" target="_blank">WhatsApp</a>
+                <a class="share-btn facebook" href="#" id="share-fb" target="_blank">Facebook</a>
+                <a class="share-btn telegram" href="#" id="share-tg" target="_blank">Telegram</a>
+            </div>
+        </div>
 
     </div>
 
-    <!-- Thanks Screen (Hidden Initially) -->
+    <!-- Thanks Screen & Video Player (Initially Hidden) -->
     <div id="thanks-container">
-        <img alt="Thanks for voting" class="thanks-img" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhdk2mwZcjLOr8gCSh71-6h5Ey6KwZwvS61UQWJ90J3Ao3RhhFOI7uYR92WNJGKyKU_MyV1BP-6RjYP7RLvxa6UYDyhQTqNAmtAtVmolEaBcs9Mn_CURYUi6wOsVpNsqqk53hxM0rE1wsJ4P4BQaHiXg0XJhjyYfZaSNOKJ1na4CMs-aZN0uPQJ0ubSp8E/s320/1000749440.jpg"/>
-        
-        <h2>മാതൃക വോട്ട് രേഖപ്പെടുത്തിയിരിക്കുന്നു. നന്ദി!</h2>
+        <div class="thanks-badge">✔ വോട്ട് വിജയികരമായി രേഖപ്പെടുത്തി</div>
+        <h2>സ. മാലിക് മാങ്കോടിന് നിങ്ങളുടെ വിലയേറിയ വോട്ട് നന്ദി!</h2>
+        <p style="font-size:14px; color:#64748b; margin-bottom:10px;">ബാലറ്റിൽ രണ്ടാമത്, ജനഹൃദയങ്ങളിൽ ഒന്നാമത്!</p>
 
+        <!-- Auto Play Campaign Video -->
         <div class="video-wrapper">
-             <!-- ഇവിടെ YOUR_YOUTUBE_VIDEO_ID എന്നതിന് പകരം വീഡിയോയുടെ ID നൽകുക -->
-             <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="true" frameborder="0" id="youtube-player" src="" title="YouTube video player">
-             </iframe>
+             <!-- ഇവിടെ YOUR_YOUTUBE_VIDEO_ID മാറ്റുക -->
+             <iframe id="youtube-player" src="" title="Campaign Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
 
-        <button class="reset-btn" onclick="resetMachine()">Back to Voting</button>
+        <button class="reset-btn" onclick="resetMachine()">വീണ്ടും വോട്ട് ചെയ്യാൻ</button>
         
         <div class="share-section" style="border-top:none; margin-top:10px;">
-             <div class="share-title">SHARE WITH FRIENDS</div>
+             <div class="share-title">സോഷ്യൽ മീഡിയയിൽ ഷെയർ ചെയ്യൂ:</div>
              <div class="share-buttons-row">
                 <a class="share-btn whatsapp" href="#" onclick="shareNow('wa')">WhatsApp</a>
                 <a class="share-btn facebook" href="#" onclick="shareNow('fb')">Facebook</a>
@@ -431,17 +475,19 @@
         </div>
     </div>
 
-   <div class="footer-copyright">
-        © 2025 Created By <b>Binu Kallara</b> <br/>
+    <!-- Footer Copyright -->
+    <div class="footer-copyright">
+        © 2026 Created By <b>Binu Kallara</b> <br/>
         <a href="https://wa.me/+6737250518" target="_blank">+6737250518</a>
     </div>
+
 </div>
 
 <script>
     let hasVoted = false;
     let audioCtx = null;
 
-    // ശബ്ദം ഉണ്ടാക്കാൻ വേണ്ടിയുള്ള ഫംഗ്ഷൻ
+    // EVM Beep Sound
     function playSound(type) {
         if (!audioCtx) {
             audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -463,13 +509,13 @@
         } else {
            oscillator.type = 'square';
            oscillator.frequency.setValueAtTime(3000, audioCtx.currentTime);
-           gainNode.gain.setValueAtTime(0.05, audioCtx.currentTime);
+           gainNode.gain.setValueAtTime(0.08, audioCtx.currentTime);
            oscillator.start();
-           oscillator.stop(audioCtx.currentTime + 2); 
+           oscillator.stop(audioCtx.currentTime + 2.5); // 2.5 സെക്കൻഡ് നീളുന്ന ബീപ് ശബ്ദം
         }
     }
 
-    // വോട്ട് ചെയ്യാനുള്ള ഫംഗ്ഷൻ
+    // Vote Cast Function
     function castVote(id) {
         const display = document.getElementById('status-display');
 
@@ -484,23 +530,23 @@
         playSound('success');
 
         const led = document.getElementById('led-' + id);
-        led.classList.add('led-on');
+        if(led) led.classList.add('led-on');
 
         display.innerHTML = "VOTE RECORDING...";
 
-        // 2 സെക്കൻഡിന് ശേഷം സ്ക്രീൻ മാറുന്നു, യൂട്യൂബ് വീഡിയോ പ്ലേ ആകുന്നു
+        // 2.5 സെക്കൻഡിന് ശേഷം സ്ക്രീൻ മാറി യൂട്യൂബ് പ്രചാരണ വീഡിയോ പ്ലേ ആകുന്നു
         setTimeout(() => {
             document.getElementById('evm-main-interface').style.display = 'none';
             document.getElementById('thanks-container').style.display = 'block';
             
-            // ഇവിടെയാണ് യൂട്യൂബ് ലിങ്ക് കൊടുക്കുന്നത് (YOUR_YOUTUBE_VIDEO_ID മാറ്റുക)
-            const videoId = "fi7ANhu1b7U"; // ഉദാഹരണം: fi7ANhu1b7U
+            // ഇവിടെ നിങ്ങളുടെ യൂട്യൂബ് വീഡിയോ ID ചേർക്കുക (ഉദാഹരണത്തിന്: fi7ANhu1b7U)
+            const videoId = "fi7ANhu1b7U"; 
             document.getElementById('youtube-player').src = "https://www.youtube.com/embed/" + videoId + "?autoplay=1&rel=0&start=0";
             
-        }, 2000);
+        }, 2500);
     }
 
-    // വീണ്ടും വോട്ട് ചെയ്യാൻ വേണ്ടി റീസെറ്റ് ചെയ്യുന്ന ഫംഗ്ഷൻ
+    // Reset Function
     function resetMachine() {
         hasVoted = false;
         const leds = document.querySelectorAll('.led-lamp');
@@ -510,29 +556,30 @@
         display.innerHTML = "READY TO VOTE";
         display.classList.remove('error-msg');
 
-        // വീഡിയോ സ്റ്റോപ്പ് ചെയ്യാൻ SRC ക്ലിയർ ചെയ്യുന്നു
+        // Stop video on reset
         document.getElementById('youtube-player').src = "";
 
         document.getElementById('evm-main-interface').style.display = 'block';
         document.getElementById('thanks-container').style.display = 'none';
     }
 
-    // --- Sharing Logic ---
+    // Sharing Logic
     window.onload = function() {
         const pageUrl = encodeURIComponent(window.location.href);
-        const pageTitle = encodeURIComponent("Check out this Sample Voting Machine!");
+        const pageTitle = encodeURIComponent("തിരുവനന്തപുരം ജില്ലാ പഞ്ചായത്ത് കല്ലറ ഡിവിഷൻ മാതൃകാ വോട്ടിങ് മെഷീനിൽ വോട്ട് ചെയ്തു നോക്കൂ!");
 
-        document.getElementById('share-wa').href = "https://api.whatsapp.com/send?text=" + pageTitle + " " + pageUrl;
+        document.getElementById('share-wa').href = "https://api.whatsapp.com/send?text=" + pageTitle + "%20" + pageUrl;
         document.getElementById('share-fb').href = "https://www.facebook.com/sharer/sharer.php?u=" + pageUrl;
         document.getElementById('share-tg').href = "https://t.me/share/url?url=" + pageUrl + "&text=" + pageTitle;
     };
 
     function shareNow(platform) {
         const pageUrl = encodeURIComponent(window.location.href);
+        const pageTitle = encodeURIComponent("തിരുവനന്തപുരം ജില്ലാ പഞ്ചായത്ത് കല്ലറ ഡിവിഷൻ മാതൃകാ വോട്ടിങ് മെഷീൻ:");
         let url = "";
-        if(platform === 'wa') url = "https://api.whatsapp.com/send?text=" + pageUrl;
+        if(platform === 'wa') url = "https://api.whatsapp.com/send?text=" + pageTitle + "%20" + pageUrl;
         if(platform === 'fb') url = "https://www.facebook.com/sharer/sharer.php?u=" + pageUrl;
-        if(platform === 'tg') url = "https://t.me/share/url?url=" + pageUrl;
+        if(platform === 'tg') url = "https://t.me/share/url?url=" + pageUrl + "&text=" + pageTitle;
         window.open(url, '_blank');
     }
 </script>
